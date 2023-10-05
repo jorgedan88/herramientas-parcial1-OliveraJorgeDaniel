@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Race_Track.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<VehiculoContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("VehiculoContext") ?? throw new InvalidOperationException("Connection string 'VehiculoContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
