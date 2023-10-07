@@ -48,6 +48,7 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
         // GET: Piloto/Create
         public IActionResult Create()
         {
+            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoNombre", "VehiculoTipo");
             return View();
         }
 
