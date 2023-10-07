@@ -1,4 +1,4 @@
-@model Race_Track.Models.Vehiculo
+@model herramientas_parcial1_OliveraJorgeDaniel.Models.Vehiculo
 
 @{
     ViewData["Title"] = "Create";
@@ -49,5 +49,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

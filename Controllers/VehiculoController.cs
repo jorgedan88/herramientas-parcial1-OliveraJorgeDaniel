@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Race_Track.Data;
-using Race_Track.Models;
+using herramientas_parcial1_OliveraJorgeDaniel.Models;
 
 namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
 {
@@ -22,9 +22,9 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
         // GET: Vehiculo
         public async Task<IActionResult> Index()
         {
-              return _context.Vehiculo != null ? 
-                          View(await _context.Vehiculo.ToListAsync()) :
-                          Problem("Entity set 'VehiculoContext.Vehiculo'  is null.");
+            return _context.Vehiculo != null ?
+                        View(await _context.Vehiculo.ToListAsync()) :
+                        Problem("Entity set 'VehiculoContext.Vehiculo'  is null.");
         }
 
         // GET: Vehiculo/Details/5
@@ -150,14 +150,14 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
             {
                 _context.Vehiculo.Remove(vehiculo);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool VehiculoExists(int id)
         {
-          return (_context.Vehiculo?.Any(e => e.VehiculoId == id)).GetValueOrDefault();
+            return (_context.Vehiculo?.Any(e => e.VehiculoId == id)).GetValueOrDefault();
         }
     }
 }

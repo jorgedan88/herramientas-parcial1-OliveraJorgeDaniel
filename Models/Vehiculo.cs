@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace Race_Track.Models
+namespace herramientas_parcial1_OliveraJorgeDaniel.Models
 {
     public class Vehiculo
     {

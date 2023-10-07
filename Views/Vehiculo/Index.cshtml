@@ -1,4 +1,4 @@
-@model IEnumerable<Race_Track.Models.Vehiculo>
+@model IEnumerable<herramientas_parcial1_OliveraJorgeDaniel.Models.Vehiculo>
 
 @{
     ViewData["Title"] = "Index";
@@ -31,29 +31,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehiculoNombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehiculoApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehiculoTipo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehiculoMatricula)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehiculoFabricacion)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.VehiculoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.VehiculoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.VehiculoId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehiculoNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehiculoApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehiculoTipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehiculoMatricula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehiculoFabricacion)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.VehiculoId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.VehiculoId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.VehiculoId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Race_Track.Data;
-using Race_Track.Models;
+using herramientas_parcial1_OliveraJorgeDaniel.Models;
+using herramientas_parcial1_OliveraJorgeDaniel.ViewModels.PilotoViewModels;
 
 namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
 {
@@ -20,11 +21,22 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
         }
 
         // GET: Piloto
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string nameFilter)
         {
-              return _context.Piloto != null ? 
-                          View(await _context.Piloto.ToListAsync()) :
-                          Problem("Entity set 'VehiculoContext.Piloto'  is null.");
+            var query = from piloto in _context.Piloto.Include(i => i.Vehiculo) select piloto;
+
+            if (!string.IsNullOrEmpty(nameFilter))
+            {
+                query = query.Where(x => x.PilotoNombre.Contains(nameFilter) || x.PilotoApellido.Contains(nameFilter) || x.PilotoDni.ToString() == nameFilter);
+            }
+
+            var model = new PilotoIndexViewModel();
+            model.pilotos = await query.ToListAsync();
+
+            return _context.Piloto != null ?
+            View(model) :
+            Problem("Entity set 'AeronaveContex.Aeronave' is null.");
+
         }
 
         // GET: Piloto/Details/5
@@ -36,6 +48,7 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
             }
 
             var piloto = await _context.Piloto
+                .Include(p => p.Vehiculo)
                 .FirstOrDefaultAsync(m => m.PilotoId == id);
             if (piloto == null)
             {
@@ -48,7 +61,7 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
         // GET: Piloto/Create
         public IActionResult Create()
         {
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoNombre", "VehiculoTipo");
+            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoTipo");
             return View();
         }
 
@@ -57,7 +70,7 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PilotoId,PilotoNombre,PilotoApellido,PilotoDni,PilotoNumeroLicencia,PilotoExpedicion,PilotoPropietario")] Piloto piloto)
+        public async Task<IActionResult> Create([Bind("PilotoId,PilotoNombre,PilotoApellido,PilotoDni,PilotoNumeroLicencia,PilotoExpedicion,PilotoPropietario,VehiculoId")] Piloto piloto)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +78,7 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoApellido", piloto.VehiculoId);
             return View(piloto);
         }
 
@@ -81,6 +95,7 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
             {
                 return NotFound();
             }
+            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoApellido", piloto.VehiculoId);
             return View(piloto);
         }
 
@@ -89,7 +104,7 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PilotoId,PilotoNombre,PilotoApellido,PilotoDni,PilotoNumeroLicencia,PilotoExpedicion,PilotoPropietario")] Piloto piloto)
+        public async Task<IActionResult> Edit(int id, [Bind("PilotoId,PilotoNombre,PilotoApellido,PilotoDni,PilotoNumeroLicencia,PilotoExpedicion,PilotoPropietario,VehiculoId")] Piloto piloto)
         {
             if (id != piloto.PilotoId)
             {
@@ -116,6 +131,7 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoApellido", piloto.VehiculoId);
             return View(piloto);
         }
 
@@ -128,6 +144,7 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
             }
 
             var piloto = await _context.Piloto
+                .Include(p => p.Vehiculo)
                 .FirstOrDefaultAsync(m => m.PilotoId == id);
             if (piloto == null)
             {
@@ -151,14 +168,14 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
             {
                 _context.Piloto.Remove(piloto);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PilotoExists(int id)
         {
-          return (_context.Piloto?.Any(e => e.PilotoId == id)).GetValueOrDefault();
+            return (_context.Piloto?.Any(e => e.PilotoId == id)).GetValueOrDefault();
         }
     }
 }
