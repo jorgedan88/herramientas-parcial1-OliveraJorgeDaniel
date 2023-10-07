@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Race_Track.Data;
 using herramientas_parcial1_OliveraJorgeDaniel.Models;
+using herramientas_parcial1_OliveraJorgeDaniel.ViewModels.VehiculoViewModels;
 
 namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
 {
@@ -20,11 +21,22 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
         }
 
         // GET: Vehiculo
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string nameFilter, VehiculoIndexViewModel vehiculoView)
         {
+            var query = from vehiculo in _context.Vehiculo select vehiculo;
+
+            if (!string.IsNullOrEmpty(nameFilter))
+            {
+                query = query.Where(x => x.VehiculoNombre.Contains(nameFilter) || x.VehiculoApellido.Contains(nameFilter) || x.VehiculoMatricula.Contains(nameFilter));
+                // query = query.Where(x => x.VehiculoNombre.Contains(nameFilter));
+            }
+
+            var model = new VehiculoIndexViewModel();
+            model.vehiculos = await query.ToListAsync();
+
             return _context.Vehiculo != null ?
-                        View(await _context.Vehiculo.ToListAsync()) :
-                        Problem("Entity set 'VehiculoContext.Vehiculo'  is null.");
+            View(model) :
+            Problem("Entity set 'AeronaveContex.Aeronave' is null.");
         }
 
         // GET: Vehiculo/Details/5
