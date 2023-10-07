@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Race_Track.Data;
 
@@ -10,9 +11,11 @@ using Race_Track.Data;
 namespace herramientas_parcial1_OliveraJorgeDaniel.Migrations
 {
     [DbContext(typeof(VehiculoContext))]
-    partial class VehiculoContextModelSnapshot : ModelSnapshot
+    [Migration("20231007135451_RelationOnetoManylMigration")]
+    partial class RelationOnetoManylMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.11");
