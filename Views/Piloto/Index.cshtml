@@ -1,14 +1,13 @@
-@* @model IEnumerable<herramientas_parcial1_OliveraJorgeDaniel.Models.Piloto> *@
 @model herramientas_parcial1_OliveraJorgeDaniel.ViewModels.PilotoViewModels.PilotoIndexViewModel;
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Pilotos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success">+ Piloto</a>
 </p>
 
 <div class="row">
@@ -17,7 +16,7 @@
             <input class="form-control" asp-for="NameFilter" />
         </div>
         <br>
-        <button type="submit">Buscar</button>
+        <button class="btn btn-info" type="submit">Buscar</button>
     </form>
 </div>
 
@@ -74,9 +73,10 @@
                     @Html.DisplayFor(modelItem => item.Vehiculo.VehiculoTipo)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.PilotoId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.PilotoId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PilotoId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.PilotoId" class="btn btn-warning">Modificar</a>
+                    <a asp-action="Details" asp-route-id="@item.PilotoId" class="btn btn-primary">Detalle</a>
+                    <a asp-action="Delete" asp-route-id="@item.PilotoId" class="btn btn-danger"
+                        onclick="return confirm('¿Esta seguro que quiere eliminar a este piloto?')">Eliminar</a>
                 </td>
             </tr>
         }

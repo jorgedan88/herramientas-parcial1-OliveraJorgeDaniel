@@ -5,10 +5,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Vehiculos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success">+ Vehiculo</a>
 </p>
 
 <div class="row">
@@ -17,7 +17,7 @@
             <input class="form-control" asp-for="NameFilter" />
         </div>
         <br>
-        <button type="submit">Buscar</button>
+        <button class="btn btn-info" type="submit">Buscar</button>
     </form>
 </div>
 
@@ -62,9 +62,10 @@
                     @Html.DisplayFor(modelItem => item.VehiculoFabricacion)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.VehiculoId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.VehiculoId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.VehiculoId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.VehiculoId" class="btn btn-warning">Modificar</a>
+                    <a asp-action="Details" asp-route-id="@item.VehiculoId" class="btn btn-primary">Detalle</a>
+                    <a asp-action="Delete" asp-route-id="@item.VehiculoId" class="btn btn-danger"
+                        onclick="return confirm('¿Esta seguro que quiere eliminar a este vehiculo?')">Eliminar</a>
                 </td>
             </tr>
         }
