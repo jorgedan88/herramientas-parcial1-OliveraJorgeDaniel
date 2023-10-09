@@ -160,8 +160,17 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
             {
                 return NotFound();
             }
+            var viewModel = new PilotoDeleteViewModel();
+            viewModel.PilotoNombre = piloto.PilotoNombre;
+            viewModel.PilotoApellido = piloto.PilotoApellido;
+            viewModel.PilotoExpedicion = piloto.PilotoExpedicion;
+            viewModel.PilotoDni = piloto.PilotoDni;
+            viewModel.PilotoNumeroLicencia = piloto.PilotoNumeroLicencia;
+            viewModel.PilotoPropietario = piloto.PilotoPropietario;
+            viewModel.VehiculoId = piloto.VehiculoId;
+            viewModel.Vehiculo = piloto.Vehiculo;
 
-            return View(piloto);
+            return View(viewModel);
         }
 
         // POST: Piloto/Delete/5

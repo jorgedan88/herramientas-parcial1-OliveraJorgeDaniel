@@ -164,8 +164,13 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
             {
                 return NotFound();
             }
+            var viewModel = new VehiculoDeleteViewModel();
+            viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
+            viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
+            viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
+            viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
 
-            return View(vehiculo);
+            return View(viewModel);
         }
 
         // POST: Vehiculo/Delete/5
