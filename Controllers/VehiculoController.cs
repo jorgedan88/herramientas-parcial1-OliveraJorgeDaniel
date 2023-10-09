@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Race_Track.Data;
 using herramientas_parcial1_OliveraJorgeDaniel.Models;
 using herramientas_parcial1_OliveraJorgeDaniel.ViewModels.VehiculoViewModels;
+using herramientas_parcial1_OliveraJorgeDaniel.ViewModels.PilotoViewModels;
 
 namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
 {
@@ -53,8 +54,13 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
             {
                 return NotFound();
             }
+            var viewModel = new VehiculoDetailViewModel();
+            viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
+            viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
+            viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
+            viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
 
-            return View(vehiculo);
+            return View(viewModel);
         }
 
         // GET: Vehiculo/Create
@@ -92,7 +98,15 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
             {
                 return NotFound();
             }
-            return View(vehiculo);
+
+            var viewModel = new VehiculoEditViewModel();
+            viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
+            viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
+            viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
+            viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
+            viewModel.VehiculoTipo = vehiculo.VehiculoTipo;
+
+            return View(viewModel);
         }
 
         // POST: Vehiculo/Edit/5
@@ -109,6 +123,12 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
 
             if (ModelState.IsValid)
             {
+                var viewModel = new VehiculoEditViewModel();
+                viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
+                viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
+                viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
+                viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
+                viewModel.VehiculoTipo = vehiculo.VehiculoTipo;
                 try
                 {
                     _context.Update(vehiculo);
