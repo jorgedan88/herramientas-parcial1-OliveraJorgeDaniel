@@ -11,9 +11,9 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.ViewModels.VehiculoViewModels
     {
 
         public int VehiculoId { get; set; }
-        public List<Vehiculo> vehiculos { get; set; } = new List<Vehiculo>();
+        //public List<Vehiculo> vehiculos { get; set; } = new List<Vehiculo>();
 
-        public String? NameFilter { get; set; }
+        //public String? NameFilter { get; set; }
 
         [Display(Name = "Nombre Propietario")]
         [Required(ErrorMessage = "Debe ingresar el nombre del propietario")]

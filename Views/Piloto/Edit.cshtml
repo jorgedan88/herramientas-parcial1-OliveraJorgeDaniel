@@ -6,7 +6,7 @@
 
 <h1>Editar Piloto</h1>
 
-<hr />
+@* <hr /> *@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -52,7 +52,7 @@
             <div class="form-group">
                 <label asp-for="VehiculoId" class="control-label"></label>
                 <select asp-for="VehiculoId" class="form-control" asp-items="ViewBag.VehiculoId"></select>
-                @* <span asp-validation-for="VehiculoId" class="text-danger"></span> *@
+                <span asp-validation-for="VehiculoId" class="text-danger"></span>
             </div>
             <br>
             <div class="form-group">
@@ -68,5 +68,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -100,6 +100,7 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
             }
 
             var viewModel = new VehiculoEditViewModel();
+            viewModel.VehiculoId = vehiculo.VehiculoId;
             viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
             viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
             viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
@@ -123,12 +124,6 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
 
             if (ModelState.IsValid)
             {
-                var viewModel = new VehiculoEditViewModel();
-                viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
-                viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
-                viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
-                viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
-                viewModel.VehiculoTipo = vehiculo.VehiculoTipo;
                 try
                 {
                     _context.Update(vehiculo);

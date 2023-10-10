@@ -80,6 +80,8 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("PilotoId,PilotoNombre,PilotoApellido,PilotoDni,PilotoNumeroLicencia,PilotoExpedicion,PilotoPropietario,VehiculoId")] Piloto piloto)
+
         public async Task<IActionResult> Create([Bind("PilotoId,PilotoNombre,PilotoApellido,PilotoDni,PilotoNumeroLicencia,PilotoExpedicion,PilotoPropietario,VehiculoId")] Piloto piloto)
         {
             if (ModelState.IsValid)
@@ -105,7 +107,7 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
             {
                 return NotFound();
             }
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoApellido", piloto.VehiculoId);
+            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoTipo", "piloto.VehiculoId");
             return View(piloto);
         }
 
@@ -141,7 +143,6 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoApellido", piloto.VehiculoId);
             return View(piloto);
         }
 
