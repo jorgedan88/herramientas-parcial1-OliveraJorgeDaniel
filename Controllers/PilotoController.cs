@@ -8,62 +8,52 @@ using Microsoft.EntityFrameworkCore;
 using Race_Track.Data;
 using herramientas_parcial1_OliveraJorgeDaniel.Models;
 using herramientas_parcial1_OliveraJorgeDaniel.ViewModels.PilotoViewModels;
+using herramieltas_parcial_OliveraJorteDaniel.Services;
 
 namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
 {
     public class PilotoController : Controller
     {
-        private readonly VehiculoContext _context;
-
-        public PilotoController(VehiculoContext context)
+        private readonly IPilotoService _pilotoService;
+        private readonly IVehiculoService _vehiculoService;
+        public PilotoController(IPilotoService pilotoService, IVehiculoService vehiculoService)
         {
-            _context = context;
+            _pilotoService = pilotoService;
+            _vehiculoService = vehiculoService;
         }
 
         // GET: Piloto
-        public async Task<IActionResult> Index(string nameFilter)
+        public IActionResult Index(string nameFilterIns)
         {
-            var query = from piloto in _context.Piloto.Include(i => i.Vehiculo) select piloto;
-
-            if (!string.IsNullOrEmpty(nameFilter))
-            {
-                query = query.Where(x => x.PilotoNombre.Contains(nameFilter) || x.PilotoApellido.Contains(nameFilter) || x.PilotoDni.ToString() == nameFilter);
-            }
 
             var model = new PilotoIndexViewModel();
-            model.pilotos = await query.ToListAsync();
+            model.pilotos = _pilotoService.GetAll(nameFilterIns);
 
-            return _context.Piloto != null ?
-            View(model) :
-            Problem("Entity set 'AeronaveContex.Aeronave' is null.");
+            return View(model);
 
         }
 
         // GET: Piloto/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null || _context.Piloto == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var piloto = await _context.Piloto
-                .Include(p => p.Vehiculo)
-                .FirstOrDefaultAsync(m => m.PilotoId == id);
+            var piloto = _pilotoService.GetById(id.Value);
             if (piloto == null)
             {
                 return NotFound();
             }
-
             var viewModel = new PilotoDetailViewModel();
             viewModel.PilotoNombre = piloto.PilotoNombre;
             viewModel.PilotoApellido = piloto.PilotoApellido;
-            viewModel.PilotoExpedicion = piloto.PilotoExpedicion;
             viewModel.PilotoDni = piloto.PilotoDni;
             viewModel.PilotoNumeroLicencia = piloto.PilotoNumeroLicencia;
+            viewModel.PilotoExpedicion = piloto.PilotoExpedicion;
             viewModel.PilotoPropietario = piloto.PilotoPropietario;
             viewModel.VehiculoId = piloto.VehiculoId;
-            viewModel.Vehiculo = piloto.Vehiculo;
 
             return View(viewModel);
         }
