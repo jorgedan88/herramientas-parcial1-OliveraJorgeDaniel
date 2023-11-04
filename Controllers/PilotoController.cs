@@ -61,46 +61,61 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
         // GET: Piloto/Create
         public IActionResult Create()
         {
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoTipo");
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", "nameFilter");
             return View();
         }
 
-        // POST: Piloto/Create
+        // POST: Instructor/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("PilotoId,PilotoNombre,PilotoApellido,PilotoDni,PilotoNumeroLicencia,PilotoExpedicion,PilotoPropietario,VehiculoId")] Piloto piloto)
-
-        public async Task<IActionResult> Create([Bind("PilotoId,PilotoNombre,PilotoApellido,PilotoDni,PilotoNumeroLicencia,PilotoExpedicion,PilotoPropietario,VehiculoId")] Piloto piloto)
+        public IActionResult Create([Bind("PilotoId, PilotoNombre, PilotoApellido, PilotoDni, PilotoNumeroLicencia, PilotoExpedicion, PilotoPropietar, VehiculoId")] PilotoCreateViewModel pilotoView)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(piloto);
-                await _context.SaveChangesAsync();
+                var instructor = new Piloto
+                {
+                    PilotoNombre = pilotoView.PilotoNombre,
+                    PilotoApellido = pilotoView.PilotoApellido,
+                    PilotoDni = pilotoView.PilotoDni,
+                    PilotoNumeroLicencia = pilotoView.PilotoNumeroLicencia,
+                    PilotoExpedicion = pilotoView.PilotoExpedicion,
+                    VehiculoId = pilotoView.VehiculoId
+
+                };
+                _pilotoService.Create(instructor);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoApellido", piloto.VehiculoId);
-            return View(piloto);
+            return View(pilotoView);
         }
 
-        // GET: Piloto/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Instructor/Edit/5      
+        public IActionResult Edit(int? id)
         {
-            if (id == null || _context.Piloto == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var piloto = await _context.Piloto.FindAsync(id);
+            var piloto = _pilotoService.GetById(id.Value);
             if (piloto == null)
             {
                 return NotFound();
             }
-            ViewData["VehiculoId"] = new SelectList(_context.Vehiculo, "VehiculoId", "VehiculoTipo", "piloto.VehiculoId");
-            return View(piloto);
-        }
 
+            var viewModel = new PilotoEditViewModel();
+            viewModel.PilotoNombre = piloto.PilotoNombre;
+            viewModel.PilotoApellido = piloto.PilotoApellido;
+            viewModel.PilotoDni = piloto.PilotoDni;
+            viewModel.PilotoNumeroLicencia = piloto.PilotoNumeroLicencia;
+            viewModel.PilotoExpedicion = piloto.PilotoExpedicion;
+            viewModel.PilotoPropietario = piloto.PilotoPropietario;
+            viewModel.VehiculoId = piloto.VehiculoId;
+
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", "nameFilter");
+            return View(viewModel);
+        }
         // POST: Piloto/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
