@@ -3,7 +3,7 @@ using Proyect_RaceTrack.Data;
 using Proyect_RaceTrack.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Proyect_RaceTrack.Services;
+namespace herramientas_parcial1_OliveraJorgeDaniel.Services;
 
 public class PilotoService : IPilotoService
 

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Race_Track.Data;
 using herramientas_parcial1_OliveraJorgeDaniel.Models;
 using herramientas_parcial1_OliveraJorgeDaniel.ViewModels.PilotoViewModels;
-using herramieltas_parcial_OliveraJorteDaniel.Services;
+using herramientas_parcial1_OliveraJorgeDaniel.Services;
 
 namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
 {

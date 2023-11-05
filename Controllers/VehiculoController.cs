@@ -7,59 +7,55 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Race_Track.Data;
 using herramientas_parcial1_OliveraJorgeDaniel.Models;
-using herramientas_parcial1_OliveraJorgeDaniel.ViewModels.VehiculoViewModels;
 using herramientas_parcial1_OliveraJorgeDaniel.ViewModels.PilotoViewModels;
+using herramientas_parcial1_OliveraJorgeDaniel.Services;
 
-namespace herramientas_parcial1_OliveraJorgeDaniel.Controllers
+using Proyect_RaceTrack.Services;
+
+using Proyect_RaceTrack.ViewModels.VehiculoViewModels;
+
+namespace Proyect_RaceTrack.Controllers
 {
     public class VehiculoController : Controller
     {
-        private readonly VehiculoContext _context;
-
-        public VehiculoController(VehiculoContext context)
+        private IVehiculoService _vehiculoService;
+        public VehiculoController(IVehiculoService vehiculoService)
         {
-            _context = context;
+            _vehiculoService = vehiculoService;
+
         }
 
         // GET: Vehiculo
-        public async Task<IActionResult> Index(string nameFilter, VehiculoIndexViewModel vehiculoView)
+        public IActionResult Index(string nameFilter)
         {
-            var query = from vehiculo in _context.Vehiculo select vehiculo;
-
-            if (!string.IsNullOrEmpty(nameFilter))
-            {
-                query = query.Where(x => x.VehiculoNombre.Contains(nameFilter) || x.VehiculoApellido.Contains(nameFilter) || x.VehiculoMatricula.Contains(nameFilter));
-                // query = query.Where(x => x.VehiculoNombre.Contains(nameFilter));
-            }
-
             var model = new VehiculoIndexViewModel();
-            model.vehiculos = await query.ToListAsync();
+            model.vehiculos = _vehiculoService.GetAll(nameFilter);
 
-            return _context.Vehiculo != null ?
-            View(model) :
-            Problem("Entity set 'AeronaveContex.Aeronave' is null.");
+            return View(model);
+
         }
 
         // GET: Vehiculo/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null || _context.Vehiculo == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var vehiculo = await _context.Vehiculo
-                .FirstOrDefaultAsync(m => m.VehiculoId == id);
+            var vehiculo = _vehiculoService.GetById(id.Value);
+            // .FirstOrDefaultAsync(m => m.AeronaveId == id);
             if (vehiculo == null)
             {
                 return NotFound();
             }
+
             var viewModel = new VehiculoDetailViewModel();
             viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
             viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
-            viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
             viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
-
+            viewModel.VehiculoTipo = vehiculo.VehiculoTipo;
+            viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
             return View(viewModel);
         }
 
