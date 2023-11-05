@@ -108,82 +108,78 @@ namespace Proyect_RaceTrack.Controllers
             // To protect from overposting attacks, enable the specific properties you want to bind to.
             // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
             [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VehiculoId,VehiculoNombre,VehiculoApellido,VehiculoTipo,VehiculoMatricula,VehiculoFabricacion")] Vehiculo vehiculo)
-        {
-            if (id != vehiculo.VehiculoId)
+            [ValidateAntiForgeryToken]
+            public IActionResult Edit(int id, [Bind("VehiculoId,VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] Vehiculo vehiculo)
             {
-                return NotFound();
+                if (id != vehiculo.VehiculoId)
+                {
+                    return NotFound();
+                }
+                //ModelState.Remove("Locales");
+                //ModelState.Remove("Talles");
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _vehiculoService.Update(vehiculo);
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!VehiculoExists(vehiculo.VehiculoId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return View(vehiculo);
             }
 
-            if (ModelState.IsValid)
+
+            // GET: Vehiculo/Delete/5
+            public IActionResult Delete(int? id)
             {
-                try
+                if (id == null)
                 {
-                    _context.Update(vehiculo);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+
+                var vehiculo = _vehiculoService.GetById(id.Value);
+                if (vehiculo == null)
                 {
-                    if (!VehiculoExists(vehiculo.VehiculoId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
+                var viewModel = new VehiculoDeleteViewModel();
+                viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
+                viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
+                viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
+                viewModel.VehiculoTipo = vehiculo.VehiculoTipo;
+                viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
+
+                return View(viewModel);
+            }
+
+            // POST: Vehiculo/Delete/5
+            [HttpPost, ActionName("Delete")]
+            [ValidateAntiForgeryToken]
+            public IActionResult DeleteConfirmed(int id)
+            {
+
+                var vehiculo = _vehiculoService.GetById(id);
+                if (vehiculo != null)
+                {
+                    _vehiculoService.Delete(id);
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(vehiculo);
-        }
 
-        // GET: Vehiculo/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Vehiculo == null)
+            private bool VehiculoExists(int id)
             {
-                return NotFound();
+                return _vehiculoService.GetById(id) != null;
             }
-
-            var vehiculo = await _context.Vehiculo
-                .FirstOrDefaultAsync(m => m.VehiculoId == id);
-            if (vehiculo == null)
-            {
-                return NotFound();
-            }
-            var viewModel = new VehiculoDeleteViewModel();
-            viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
-            viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
-            viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
-            viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
-
-            return View(viewModel);
-        }
-
-        // POST: Vehiculo/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Vehiculo == null)
-            {
-                return Problem("Entity set 'VehiculoContext.Vehiculo'  is null.");
-            }
-            var vehiculo = await _context.Vehiculo.FindAsync(id);
-            if (vehiculo != null)
-            {
-                _context.Vehiculo.Remove(vehiculo);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool VehiculoExists(int id)
-        {
-            return (_context.Vehiculo?.Any(e => e.VehiculoId == id)).GetValueOrDefault();
-        }
-    }
-}
