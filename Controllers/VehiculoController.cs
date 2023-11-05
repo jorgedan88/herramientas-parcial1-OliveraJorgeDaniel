@@ -70,46 +70,44 @@ namespace Proyect_RaceTrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VehiculoId,VehiculoNombre,VehiculoApellido,VehiculoTipo,VehiculoMatricula,VehiculoFabricacion")] Vehiculo vehiculo)
+        public IActionResult Create([Bind("VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] VehiculoCreateViewModel vehiculoView)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(vehiculo);
-                await _context.SaveChangesAsync();
+                var vehiculo = new Vehiculo
+                {
+                    VehiculoNombre = vehiculoView.VehiculoNombre,
+                    VehiculoApellido = vehiculoView.VehiculoApellido,
+                    VehiculoMatricula = vehiculoView.VehiculoMatricula,
+                    VehiculoFabricacion = vehiculoView.VehiculoFabricacion,
+                    VehiculoTipo = vehiculoView.VehiculoTipo,
+                };
+
+                _vehiculoService.Create(vehiculo);
                 return RedirectToAction(nameof(Index));
             }
-            return View(vehiculo);
+            return View(vehiculoView);
         }
 
         // GET: Vehiculo/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
-            if (id == null || _context.Vehiculo == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var vehiculo = await _context.Vehiculo.FindAsync(id);
+            var vehiculo = _vehiculoService.GetById(id.Value);
             if (vehiculo == null)
             {
                 return NotFound();
             }
+            return View(vehiculo);
 
-            var viewModel = new VehiculoEditViewModel();
-            viewModel.VehiculoId = vehiculo.VehiculoId;
-            viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
-            viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
-            viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
-            viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
-            viewModel.VehiculoTipo = vehiculo.VehiculoTipo;
-
-            return View(viewModel);
-        }
-
-        // POST: Vehiculo/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+            // POST: Vehiculo/Edit/5
+            // To protect from overposting attacks, enable the specific properties you want to bind to.
+            // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+            [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("VehiculoId,VehiculoNombre,VehiculoApellido,VehiculoTipo,VehiculoMatricula,VehiculoFabricacion")] Vehiculo vehiculo)
         {
