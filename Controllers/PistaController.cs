@@ -229,6 +229,4 @@ namespace Proyect_RaceTrack.Controllers
     }
 }
 
-    }
-}
-
+    
