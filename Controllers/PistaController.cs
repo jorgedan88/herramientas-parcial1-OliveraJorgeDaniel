@@ -180,6 +180,55 @@ namespace Proyect_RaceTrack.Controllers
 
             return View(pista);
         }
+
+        // GET: Pista/Delete/5
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var pista = _pistaService.GetById(id.Value);
+            if (pista == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new PistaDeleteViewModel();
+            viewModel.PistaId = pista.PistaId;
+            viewModel.PistaNombre = pista.PistaNombre;
+            viewModel.PistaCodigo = pista.PistaCodigo;
+            viewModel.PistaMaterial = pista.PistaMaterial;
+            viewModel.PistaIluminacion = pista.PistaIluminacion;
+            viewModel.PistaAprovisionamiento = pista.PistaAprovisionamiento;
+            // viewModel.Hangars = await _context.Hangar.ToListAsync(); lo sugirio el IDE considerar
+
+            return View(viewModel);
+        }
+
+        // POST: Pista/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+
+            var aeronave = _pistaService.GetById(id);
+            if (aeronave != null)
+            {
+                _pistaService.Delete(id);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool PistaExists(int id)
+        {
+            return _pistaService.GetById(id) != null;
+        }
+    }
+}
+
     }
 }
 
