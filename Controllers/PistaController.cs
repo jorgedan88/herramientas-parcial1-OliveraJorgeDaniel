@@ -64,6 +64,71 @@ namespace Proyect_RaceTrack.Controllers
             ViewData["Cocheras"] = new SelectList(_cocheraService.GetAll(), "CocheraId", "CocheraNombre", "nameFilterCoch");
             return View();
         }
+
+        // GET: Pista/Create
+        public IActionResult Create()
+        {
+            ViewData["Cocheras"] = new SelectList(_cocheraService.GetAll(), "CocheraId", "CocheraNombre", "nameFilterCoch");
+            return View();
+        }
+
+        // POST: Pista/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult Create([Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento,CocheraIds")] PistaCreateViewModel pistaView)
+        {
+            //ModelState.Remove("Hangars"); No olvidar borrar esta validacion al realizar la relacion MaM
+            if (ModelState.IsValid)
+            {
+                // var hangars = _context.Hangar.Where(x=> pistaView.HangarIds.Contains(x.HangarId)).ToList();
+
+                var pista = new Pista
+                {
+                    PistaNombre = pistaView.PistaNombre,
+                    PistaCodigo = pistaView.PistaCodigo,
+                    PistaMaterial = pistaView.PistaMaterial,
+                    PistaIluminacion = pistaView.PistaIluminacion,
+                    PistaAprovisionamiento = pistaView.PistaAprovisionamiento,
+                    // Hangars = hangars
+                };
+
+                _pistaService.Create(pista);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(pistaView);
+        }
+
+        // GET: Pista/Edit/5
+
+        // public IActionResult Edit(int? id)
+        // {
+        //     if (id == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     var pista = _pistaService.GetById(id.Value);
+        //     if (pista == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     var viewModel = new PistaEditViewModel();
+        //     viewModel.PistaId = pista.PistaId;
+        //     viewModel.PistaNombre = pista.PistaNombre;
+        //     viewModel.PistaCodigo = pista.PistaCodigo;
+        //     viewModel.PistaMaterial = pista.PistaMaterial;
+        //     viewModel.PistaIluminacion = pista.PistaIluminacion;
+        //     viewModel.PistaAprovisionamiento = pista.PistaAprovisionamiento;
+        //     //viewModel.Hangars = pista.Hangars;
+        //     // viewModel.HangarIds = pista.HangarsIds;
+        //     // viewModel.Hangars = await _context.Hangar.ToListAsync(); lo sugirio el IDE considerar
+
+        //     //ViewData["Hangars"] = new SelectList(_hangarService.GetAll(), "HangarId", "HangarNombre", "NameFilterCoc");
+        //     return View(viewModel);
+        // }
     }
 }
 
