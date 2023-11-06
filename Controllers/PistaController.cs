@@ -129,6 +129,57 @@ namespace Proyect_RaceTrack.Controllers
         //     //ViewData["Hangars"] = new SelectList(_hangarService.GetAll(), "HangarId", "HangarNombre", "NameFilterCoc");
         //     return View(viewModel);
         // }
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var pista = _pistaService.GetById(id.Value);
+            ViewData["CocheraId"] = new SelectList(_cocheraService.GetAll(), "CocheraId", "VehiculoTipo", "nameFilter");
+            if (pista == null)
+            {
+                return NotFound();
+            }
+            return View(pista);
+        }
+
+        // POST: Pista/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, [Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento,CocheraIds")] Pista pista)
+        {
+            if (id != pista.PistaId)
+            {
+                return NotFound();
+            }
+            //ModelState.Remove("Locales");
+            //ModelState.Remove("Talles");
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _pistaService.Update(pista);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PistaExists(pista.PistaId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(pista);
+        }
     }
 }
 
