@@ -96,3 +96,85 @@ namespace Proyect_RaceTrack.Controllers
             ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre", "nameFilterPista");
             return View();
         }
+        // POST: Cochera/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create([Bind("CocheraId, CocheraNombre, CocheraNumero, CocheraSector,CocheraAptoMantenimiento,CocheraOficinas,PistaIds")] CocheraCreateViewModel cocheraView)
+        {
+            if (ModelState.IsValid)
+            {
+                // var pistas = _context.Pista.Where(x=> hangarView.PistaIds.Contains(x.PistaId)).ToList();
+
+                var cochera = new Cochera
+                {
+                    CocheraNombre = cocheraView.CocheraNombre,
+                    CocheraNumero = cocheraView.CocheraNumero,
+                    CocheraSector = cocheraView.CocheraSector,
+                    CocheraAptoMantenimiento = cocheraView.CocheraAptoMantenimiento,
+                    CocheraOficinas = cocheraView.CocheraOficinas,
+                    // Pistas = pistas
+
+                };
+
+
+                _cocheraService.Create(cochera);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(cocheraView);
+        }
+
+        // GET: Cochera/Edit/5
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cochera = _cocheraService.GetById(id.Value);
+            if (cochera == null)
+            {
+                return NotFound();
+            }
+            return View(cochera);
+        }
+
+        // POST: Cochera/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, [Bind("CocheraId, CocheraNombre, CocheraNumero, CocheraSector,CocheraAptoMantenimiento,CocheraOficinas,PistaIds")] Cochera cochera)
+        {
+            if (id != cochera.CocheraId)
+            {
+                return NotFound();
+            }
+            //ModelState.Remove("Locales");
+            //ModelState.Remove("Talles");
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _cocheraService.Update(cochera);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CocheraExists(cochera.CocheraId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(cochera);
+        }
+    }
+}
