@@ -17,33 +17,6 @@ namespace Proyect_RaceTrack.Controllers
     public class CocheraController : Controller
     {
         private ICocheraService _cocheraService;
-
-        public CocheraController(ICocheraService cocheraService)
-        {
-            _cocheraService = cocheraService;
-        }
-
-    }
-}
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Proyect_RaceTrack.Data;
-using Proyect_RaceTrack.Models;
-using Proyect_RaceTrack.ViewModels.CocheraViewModels;
-using Proyect_RaceTrack.Services;
-using Proyect_RaceTrack.ViewModels;
-using Proyect_RaceTrack.ViewModels.PistaViewModels;
-
-namespace Proyect_RaceTrack.Controllers
-{
-    public class CocheraController : Controller
-    {
-        private ICocheraService _cocheraService;
         private IPistaService _pistaService;
 
         public CocheraController(ICocheraService cocheraService, IPistaService pistaService)
@@ -96,6 +69,7 @@ namespace Proyect_RaceTrack.Controllers
             ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre", "nameFilterPista");
             return View();
         }
+
         // POST: Cochera/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -175,6 +149,50 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             return View(cochera);
+        }
+
+        // GET: Cochera/Delete/5
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cochera = _cocheraService.GetById(id.Value);
+            if (cochera == null)
+            {
+                return NotFound();
+            }
+            var viewModel = new CocheraDeleteViewModel();
+            viewModel.CocheraNombre = cochera.CocheraNombre;
+            viewModel.CocheraNumero = cochera.CocheraNumero;
+            viewModel.CocheraSector = cochera.CocheraSector;
+            viewModel.CocheraAptoMantenimiento = cochera.CocheraAptoMantenimiento;
+            viewModel.CocheraOficinas = cochera.CocheraOficinas;
+
+            return View(viewModel);
+
+        }
+
+        // POST: Cochera/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+
+            var cochera = _cocheraService.GetById(id);
+            if (cochera != null)
+            {
+                _cocheraService.Delete(id);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool CocheraExists(int id)
+        {
+            return _cocheraService.GetById(id) != null;
         }
     }
 }
