@@ -8,6 +8,15 @@ builder.Services.AddDbContext<VehiculoContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//Con este bloque de codigo se configura el servicio de autorizacion
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
