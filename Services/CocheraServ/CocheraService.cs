@@ -46,12 +46,6 @@ public class CocheraService : ICocheraService
 
     }
 
-    // public void GEtById(Hangar obj)
-    // {
-    //     throw new NotImplementedException();
-    // }
-
-
     public Cochera? GetById(int id)
     {
         var cochera = _context.Cochera
