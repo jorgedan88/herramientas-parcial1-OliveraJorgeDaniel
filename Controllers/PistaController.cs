@@ -40,7 +40,6 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var pista = _pistaService.GetById(id.Value);
-            // .FirstOrDefaultAsync(m => m.AeronaveId == id);
             if (pista == null)
             {
                 return NotFound();
@@ -53,7 +52,6 @@ namespace Proyect_RaceTrack.Controllers
             viewModel.PistaMaterial = pista.PistaMaterial;
             viewModel.PistaIluminacion = pista.PistaIluminacion;
             viewModel.PistaAprovisionamiento = pista.PistaAprovisionamiento;
-            //viewModel.Hangars = await _context.Hangar.ToListAsync(); lo sugirio el IDE considerar
 
             return View(viewModel);
         }
@@ -73,18 +71,13 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // POST: Pista/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
 
         public IActionResult Create([Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento,CocheraIds")] PistaCreateViewModel pistaView)
         {
-            //ModelState.Remove("Hangars"); No olvidar borrar esta validacion al realizar la relacion MaM
             if (ModelState.IsValid)
             {
-                // var hangars = _context.Hangar.Where(x=> pistaView.HangarIds.Contains(x.HangarId)).ToList();
-
                 var pista = new Pista
                 {
                     PistaNombre = pistaView.PistaNombre,
@@ -92,7 +85,6 @@ namespace Proyect_RaceTrack.Controllers
                     PistaMaterial = pistaView.PistaMaterial,
                     PistaIluminacion = pistaView.PistaIluminacion,
                     PistaAprovisionamiento = pistaView.PistaAprovisionamiento,
-                    // Hangars = hangars
                 };
 
                 _pistaService.Create(pista);
@@ -102,33 +94,6 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Pista/Edit/5
-
-        // public IActionResult Edit(int? id)
-        // {
-        //     if (id == null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     var pista = _pistaService.GetById(id.Value);
-        //     if (pista == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     var viewModel = new PistaEditViewModel();
-        //     viewModel.PistaId = pista.PistaId;
-        //     viewModel.PistaNombre = pista.PistaNombre;
-        //     viewModel.PistaCodigo = pista.PistaCodigo;
-        //     viewModel.PistaMaterial = pista.PistaMaterial;
-        //     viewModel.PistaIluminacion = pista.PistaIluminacion;
-        //     viewModel.PistaAprovisionamiento = pista.PistaAprovisionamiento;
-        //     //viewModel.Hangars = pista.Hangars;
-        //     // viewModel.HangarIds = pista.HangarsIds;
-        //     // viewModel.Hangars = await _context.Hangar.ToListAsync(); lo sugirio el IDE considerar
-
-        //     //ViewData["Hangars"] = new SelectList(_hangarService.GetAll(), "HangarId", "HangarNombre", "NameFilterCoc");
-        //     return View(viewModel);
-        // }
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -146,8 +111,6 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // POST: Pista/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento,CocheraIds")] Pista pista)
@@ -156,8 +119,6 @@ namespace Proyect_RaceTrack.Controllers
             {
                 return NotFound();
             }
-            //ModelState.Remove("Locales");
-            //ModelState.Remove("Talles");
             if (ModelState.IsValid)
             {
                 try
@@ -202,8 +163,6 @@ namespace Proyect_RaceTrack.Controllers
             viewModel.PistaMaterial = pista.PistaMaterial;
             viewModel.PistaIluminacion = pista.PistaIluminacion;
             viewModel.PistaAprovisionamiento = pista.PistaAprovisionamiento;
-            // viewModel.Hangars = await _context.Hangar.ToListAsync(); lo sugirio el IDE considerar
-
             return View(viewModel);
         }
 
