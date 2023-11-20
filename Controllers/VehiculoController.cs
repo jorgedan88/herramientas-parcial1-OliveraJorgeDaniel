@@ -44,7 +44,6 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var vehiculo = _vehiculoService.GetById(id.Value);
-            // .FirstOrDefaultAsync(m => m.AeronaveId == id);
             if (vehiculo == null)
             {
                 return NotFound();
@@ -66,8 +65,6 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // POST: Vehiculo/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] VehiculoCreateViewModel vehiculoView)
@@ -105,8 +102,6 @@ namespace Proyect_RaceTrack.Controllers
             return View(vehiculo);
 
             // POST: Vehiculo/Edit/5
-            // To protect from overposting attacks, enable the specific properties you want to bind to.
-            // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
             [HttpPost]
             [ValidateAntiForgeryToken]
             public IActionResult Edit(int id, [Bind("VehiculoId,VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] Vehiculo vehiculo)
@@ -115,8 +110,7 @@ namespace Proyect_RaceTrack.Controllers
                 {
                     return NotFound();
                 }
-                //ModelState.Remove("Locales");
-                //ModelState.Remove("Talles");
+
                 if (ModelState.IsValid)
                 {
                     try
