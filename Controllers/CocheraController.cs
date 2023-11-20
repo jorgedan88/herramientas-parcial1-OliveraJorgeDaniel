@@ -44,7 +44,6 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var cochera = _cocheraService.GetById(id.Value);
-            // .FirstOrDefaultAsync(m => m.AeronaveId == id);
             if (cochera == null)
             {
                 return NotFound();
@@ -56,7 +55,6 @@ namespace Proyect_RaceTrack.Controllers
             viewModel.CocheraSector = cochera.CocheraSector;
             viewModel.CocheraAptoMantenimiento = cochera.CocheraAptoMantenimiento;
             viewModel.CocheraOficinas = cochera.CocheraOficinas;
-            //viewModel.Pistas = hangar.Pistas;
 
             return View(viewModel);
         }
@@ -64,15 +62,12 @@ namespace Proyect_RaceTrack.Controllers
         // GET: Cochera/Create
         public IActionResult Create()
         {
-            // ViewData["Pistas"] = new SelectList(_context.Pista.ToList(),"PistaId","PistaNombre");
-            //ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre", "nameFilterPista");
+
             ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre", "nameFilterPista");
             return View();
         }
 
         // POST: Cochera/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("CocheraId, CocheraNombre, CocheraNumero, CocheraSector,CocheraAptoMantenimiento,CocheraOficinas,PistaIds")] CocheraCreateViewModel cocheraView)
@@ -116,8 +111,6 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // POST: Cochera/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("CocheraId, CocheraNombre, CocheraNumero, CocheraSector,CocheraAptoMantenimiento,CocheraOficinas,PistaIds")] Cochera cochera)
@@ -126,8 +119,6 @@ namespace Proyect_RaceTrack.Controllers
             {
                 return NotFound();
             }
-            //ModelState.Remove("Locales");
-            //ModelState.Remove("Talles");
             if (ModelState.IsValid)
             {
                 try
