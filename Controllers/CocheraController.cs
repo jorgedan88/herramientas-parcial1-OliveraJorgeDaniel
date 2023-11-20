@@ -74,7 +74,8 @@ namespace Proyect_RaceTrack.Controllers
         {
             if (ModelState.IsValid)
             {
-                // var pistas = _context.Pista.Where(x=> hangarView.PistaIds.Contains(x.PistaId)).ToList();
+                //var pistas = _context.Pista.Where(x=> hangarView.PistaIds.Contains(x.PistaId)).ToList();
+                var pistas = _pistaService.GetAll().Where(x => cocheraView.PistaIds.Contains(x.PistaId)).ToList();
 
                 var cochera = new Cochera
                 {
@@ -83,7 +84,7 @@ namespace Proyect_RaceTrack.Controllers
                     CocheraSector = cocheraView.CocheraSector,
                     CocheraAptoMantenimiento = cocheraView.CocheraAptoMantenimiento,
                     CocheraOficinas = cocheraView.CocheraOficinas,
-                    // Pistas = pistas
+                    Pistas = pistas
 
                 };
 
