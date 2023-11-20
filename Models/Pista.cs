@@ -15,6 +15,6 @@ namespace Proyecto_PrimerParcial.Models
         public PistaType PistaMaterial { get; set; }
         public bool PistaIluminacion { get; set; } = true;
         public bool PistaAprovisionamiento { get; set; } = true;
-        //public virtual List<Cochera> Cocheras { get; set; }
+
     }
 }

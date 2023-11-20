@@ -14,7 +14,6 @@ namespace herramientas_parcial1_OliveraJorgeDaniel.Models
         public CocheraType CocheraSector { get; set; }
         public bool CocheraAptoMantenimiento { get; set; } = true;
         public bool CocheraOficinas { get; set; } = true;
-        //public virtual List<Pista> Pistas { get; set; }
 
     }
 }
