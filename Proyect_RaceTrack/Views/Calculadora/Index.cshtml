@@ -1,0 +1,104 @@
+@model IEnumerable<Proyect_RaceTrack.Models.Calculadora>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Calculo valor pista libre </h1>
+
+<hr />
+@* <p>@Model.Name</p> *@
+<div>
+    @* <p>Precio actual: @Model.Price</p> *@
+</div>
+@* <div class="row"> *@
+<div class="mb-3">
+
+    <div class="col-md-6">
+        <form asp-action="UpdatePrice" method="post">
+            <br>
+            <label for="txtCosto">Costo combustible (Lts/$):</label>
+            <input type="number" id="txtCosto" required>
+            <br>
+            <br>
+            <label for="txtCantidad">Consumo (Lts/H):</label>
+            <input type="number" id="txtCantidad" required>
+            <br>
+            <br>
+            <label>Categoria de vehiculo:</label>
+            <br>
+            <label><input type="radio" name="opcionOperacion" value="opcion1"> Monoplaza</label>
+            <label><input type="radio" name="opcionOperacion" value="opcion2"> GT</label>
+            <label><input type="radio" name="opcionOperacion" value="opcion3"> Stop Car</label>
+            <label><input type="radio" name="opcionOperacion" value="opcion3"> Turismo Pista</label>
+            <label><input type="radio" name="opcionOperacion" value="opcion3"> Rally</label>
+            <br>
+            <br>
+            <label for="chkSumar50000"><input type="checkbox" id="chkSumar50000"> Necesita instructor?</label>
+            <br>
+            <br>
+            <button class="btn btn-primary" type="button" id="btnCalcular">Calcular</button>
+            <br>
+            <br>
+            <label for="txtResultado">El valor hora para la Categoria seleccionada es:</label>
+            <input type="text" id="txtResultado" readonly>
+
+            <button type="button" id="btnLimpiar">Limpiar</button>
+        </form>
+
+        <script>
+            // JavaScript para manejar la lógica de la calculadora
+            document.addEventListener('DOMContentLoaded', function () {
+                const calculadoraForm = document.getElementById('calculadoraForm');
+                const txtCosto = document.getElementById('txtCosto');
+                const txtCantidad = document.getElementById('txtCantidad');
+                const btnCalcular = document.getElementById('btnCalcular');
+                const txtResultado = document.getElementById('txtResultado');
+                const chkSumar50000 = document.getElementById('chkSumar50000');
+                const btnLimpiar = document.getElementById('btnLimpiar');
+
+                btnCalcular.addEventListener('click', function () {
+                    const costo = parseFloat(txtCosto.value);
+                    const cantidad = parseInt(txtCantidad.value);
+                    const opcionOperacion = document.querySelector('input[name="opcionOperacion"]:checked');
+
+                    if (!isNaN(costo) && !isNaN(cantidad) && opcionOperacion) {
+                        const operacionValue = opcionOperacion.value;
+
+                        let resultado = costo * cantidad;
+
+                        // Realiza la operación adicional según la opción seleccionada
+                        if (operacionValue === 'opcion1') {
+                            resultado += 10000;
+                        } else if (operacionValue === 'opcion2') {
+                            resultado += 20000; // Suma 10000
+                        } else if (operacionValue === 'opcion3') {
+                            resultado += 30000; // Suma 30000
+                        }
+
+                        // Suma 50000 si el checkbox está marcado
+                        if (chkSumar50000.checked) {
+                            resultado += 50000;
+                        }
+
+                        txtResultado.value = resultado.toFixed(2);
+                    } else {
+                        alert('Por favor, ingrese valores numéricos válidos, seleccione una opción de operación y marque o desmarque la opción de suma.');
+                    }
+                });
+
+                btnLimpiar.addEventListener('click', function () {
+                    // Limpia todos los campos del formulario
+                    txtCosto.value = '';
+                    txtCantidad.value = '';
+                    document.querySelector('input[name="opcionOperacion"]:checked').checked = false;
+                    chkSumar50000.checked = false;
+                    txtResultado.value = '';
+                });
+            });
+        </script>
+    </div>
+    <div>
+        <a asp-action="Index">Volver</a>
+    </div>
+</div>
