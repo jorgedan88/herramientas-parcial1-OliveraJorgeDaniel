@@ -54,3 +54,27 @@ Desde la carpeta donde se clono el proyecto ejecutar el siguiente comando para e
 dotnet run
 
 ```
+
+FUNCIONALIDAD:
+El sistema cuenta con una calculadora en funcionamiento aunque abierta a mejoras a futuro cuyo funcionamiento es el siguiente:
+
+PRECONDICIONES
+- Para acceder al sistema el usuario debera contar con usuario y contraseña.
+
+PASOS
+1- Loguearse en el sistema Racer Track
+2- Desde el menu principal ingresar a la pestaña calculadora.
+3- En la pantalla calculadora campletar los siguientes campos:
+  - Ingresar el valor en pesos Argentinos del litro de combustible.
+  - Ingresar el consumo en litros por hora del vehiculo (proximamente se implementara una tabla con estos valores para esta funcionalidad)
+  - Seleccionar la categoria de competición del vehiculo a utilizar entre las siguientes:
+    . Monoplaza (Agrega $3000 al valor hora)
+    . GT (Agrega $4000 al valor hora)
+    . Turismo Pista (Agrega $4500 al valor hora)
+    . Stop Car (Agrega $5500 al valor hora)
+    . Rally (Agrega $7000 al valor hora)
+
+    - En el caso de contratar un instructor activar el check (el mismo de estar activado agrega $50000 al valor hora)
+4- Para realizar el calculo presione el botón calcular.
+5- Si se decea realizar otro calculo presionar el boton "Limpiar"
+6- Si se desea volver al menu principal presionar el boton "Volver"
