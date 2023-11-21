@@ -4,19 +4,35 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Calculo valor pista libre </h1>
+<h1>Calcular valor pista libre </h1>
 
 <hr />
-@* <p>@Model.Name</p> *@
-<div>
-    @* <p>Precio actual: @Model.Price</p> *@
-</div>
-@* <div class="row"> *@
+
 <div class="mb-3">
 
+<link rel="stylesheet" href="/Proyect_RaceTrack/wwwroot/js/Logica.js">
     <div class="col-md-6">
-        <form asp-action="UpdatePrice" method="post">
-            <br>
+            @* <div class="card">
+                <div class="card-body card border-primary mb-0">
+                    
+    Para calcular el costo de la hora de uso de pista libre ingrese los datos correspondientes y presione el boton calcular.
+  </div> *@
+            <p>
+            <button class="btn btn-info" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                    Como usar la calculadora?
+                </button>
+            </p>
+        <div class="col-md-" style="min-height: 120px;">
+                <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                    <div class="card card-body" style="width: 900px;">
+                    Para calcular el costo de la hora de uso de pista libre ingrese el valor del litro de combustible,
+                    el consumo del vehículo, la categoría de competición y por último si la hora de uso incluye el
+                    acompañamiento de un instructor para mostrar el valor de esta presione el botón calcular.
+                    </div>
+                </div>
+
+
             <label for="txtCosto">Costo combustible (Lts/$):</label>
             <input type="number" id="txtCosto" required>
             <br>
@@ -30,8 +46,8 @@
             <label><input type="radio" name="opcionOperacion" value="opcion1"> Monoplaza</label>
             <label><input type="radio" name="opcionOperacion" value="opcion2"> GT</label>
             <label><input type="radio" name="opcionOperacion" value="opcion3"> Stop Car</label>
-            <label><input type="radio" name="opcionOperacion" value="opcion3"> Turismo Pista</label>
-            <label><input type="radio" name="opcionOperacion" value="opcion3"> Rally</label>
+            <label><input type="radio" name="opcionOperacion" value="opcion4"> Turismo Pista</label>
+            <label><input type="radio" name="opcionOperacion" value="opcion5"> Rally</label>
             <br>
             <br>
             <label for="chkSumar50000"><input type="checkbox" id="chkSumar50000"> Necesita instructor?</label>
@@ -43,11 +59,11 @@
             <label for="txtResultado">El valor hora para la Categoria seleccionada es:</label>
             <input type="text" id="txtResultado" readonly>
 
-            <button type="button" id="btnLimpiar">Limpiar</button>
-        </form>
+            <button type="button" id="btnLimpiar" class="btn btn-outline-primary">Limpiar</button>
+
 
         <script>
-            // JavaScript para manejar la lógica de la calculadora
+            @* Con este bloque se arma la lógica de la calculadora *@
             document.addEventListener('DOMContentLoaded', function () {
                 const calculadoraForm = document.getElementById('calculadoraForm');
                 const txtCosto = document.getElementById('txtCosto');
@@ -67,18 +83,23 @@
 
                         let resultado = costo * cantidad;
 
-                        // Realiza la operación adicional según la opción seleccionada
+                        @* Este bloque ejecuta la del suma al valor  según la categoria seleccionada *@
                         if (operacionValue === 'opcion1') {
-                            resultado += 10000;
+                            resultado += 3000;
                         } else if (operacionValue === 'opcion2') {
-                            resultado += 20000; // Suma 10000
+                            resultado += 4000; // Suma 4000
                         } else if (operacionValue === 'opcion3') {
-                            resultado += 30000; // Suma 30000
+                            resultado += 4500; // Suma 4500
+                        } else if (operacionValue === 'opcion4') {
+                            resultado += 5500; // Suma 5500
+                        } else if (operacionValue === 'opcion5') {
+                            resultado += 7000; // Suma 7000
                         }
 
-                        // Suma 50000 si el checkbox está marcado
+
+                        @* Este bloque de codigo suma 5000 si el checkbox está marcado (necesita instructor)*@
                         if (chkSumar50000.checked) {
-                            resultado += 50000;
+                            resultado += 5000;
                         }
 
                         txtResultado.value = resultado.toFixed(2);
@@ -87,8 +108,8 @@
                     }
                 });
 
+                    @* Este bloque de codigo es para el boton que limpia todos los campos del formulario. *@
                 btnLimpiar.addEventListener('click', function () {
-                    // Limpia todos los campos del formulario
                     txtCosto.value = '';
                     txtCantidad.value = '';
                     document.querySelector('input[name="opcionOperacion"]:checked').checked = false;
@@ -97,8 +118,9 @@
                 });
             });
         </script>
-    </div>
-    <div>
+    @* </div>
+            <script> src ="/Proyect_RaceTrack/wwwroot/js/Logica.js"</script>*@
+    <div> 
         <a asp-action="Index">Volver</a>
     </div>
 </div>
