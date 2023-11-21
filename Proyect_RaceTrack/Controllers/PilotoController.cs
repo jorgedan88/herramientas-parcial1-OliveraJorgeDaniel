@@ -26,13 +26,10 @@ namespace Proyect_RaceTrack.Controllers
         // GET: Piloto
         public IActionResult Index(string nameFilterIns)
         {
-            // var query = from instructor in _context.Instructor.Include(i => i.Aeronave) select instructor;
-
             var model = new PilotoIndexViewModel();
             model.pilotos = _pilotoService.GetAll(nameFilterIns);
 
             return View(model);
-
         }
 
         // GET: Piloto/Details/5
@@ -44,8 +41,6 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var piloto = _pilotoService.GetById(id.Value);
-                // .Include(p => p.Vehiculo)
-                // .FirstOrDefaultAsync(m => m.PilotoId == id);
             if (piloto == null)
             {
                 return NotFound();
@@ -57,7 +52,6 @@ namespace Proyect_RaceTrack.Controllers
             viewModel.PilotoNumeroLicencia = piloto.PilotoNumeroLicencia;
             viewModel.PilotoExpedicion = piloto.PilotoExpedicion;
             viewModel.PilotoPropietario = piloto.PilotoPropietario;
-            //viewModel.Pi = piloto.PilotoEnActividad;
             viewModel.VehiculoId = piloto.VehiculoId;
             viewModel.Vehiculo = piloto.Vehiculo;
 
@@ -67,17 +61,11 @@ namespace Proyect_RaceTrack.Controllers
         // GET: Piloto/Create
         public IActionResult Create()
         {
-            // ViewData["AeronaveId"] = new SelectList(_context.Aeronave, "AeronaveId", "AeronaveTipo",  "instructor.AeronaveId");
-            // ViewData["AeronaveId"] = new SelectList(_aeronaveService.GetAll(), "AeronaveId", "AeronaveTipo",  "instructor.AeronaveId", "nameFilter");
             ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", "nameFilter");
-            // ViewData["AeronaveId"] = new SelectList(_aeronaveService.GetAll(), "AeronaveId", "instructor.AeronaveId", "nameFilter");
-            // ViewData["AeronaveId"] = new SelectList(_aeronaveService.GetAll(), "AeronaveTipo",  "instructor.AeronaveId", "nameFilter");
             return View();
         }
 
         // POST: Instructor/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("PilotoId, PilotoNombre, PilotoApellido, PilotoDni, PilotoNumeroLicencia, PilotoExpedicion, PilotoPropietar, VehiculoId")] PilotoCreateViewModel pilotoView)
@@ -89,17 +77,14 @@ namespace Proyect_RaceTrack.Controllers
                     PilotoNombre = pilotoView.PilotoNombre,
                     PilotoApellido = pilotoView.PilotoApellido,
                     PilotoDni = pilotoView.PilotoDni,
-                    //PilotoTipoLicencia = pilotoView.InstructorTipoLicencia,
                     PilotoNumeroLicencia = pilotoView.PilotoNumeroLicencia,
                     PilotoExpedicion = pilotoView.PilotoExpedicion,
-                    //PilotoEnActividad = pilotoView.PilotoEnActividad,
                     VehiculoId = pilotoView.VehiculoId
 
                 };
                 _pilotoService.Create(instructor);
                 return RedirectToAction(nameof(Index));
             }
-            // ViewData["AeronaveId"] = new SelectList(_context.Aeronave, "AeronaveId", "TipoAeronave",  "instructor.AeronaveId");
             return View(pilotoView);
         }
 
@@ -112,7 +97,6 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var piloto = _pilotoService.GetById(id.Value);
-            //ViewData["VehiculoId"] = new SelectList(_contextVehiculo, "VehiculoId", "TipoVehiculo", "piloto.VehiculoId");
             ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", "nameFilter");
             if (piloto == null)
             {
@@ -121,8 +105,6 @@ namespace Proyect_RaceTrack.Controllers
             return View(piloto);
         }
         // POST: Instructor/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("PilotoId, PilotoNombre, PilotoApellido, PilotoDni, PilotoNumeroLicencia, PilotoExpedicion, PilotoPropietar, VehiculoId")] Piloto piloto)
@@ -175,7 +157,6 @@ namespace Proyect_RaceTrack.Controllers
             viewModel.PilotoNumeroLicencia = piloto.PilotoNumeroLicencia;
             viewModel.PilotoExpedicion = piloto.PilotoExpedicion;
             viewModel.PilotoPropietario = piloto.PilotoPropietario;
-            //viewModel.Pi = instructor.InstructorEnActividad;
             viewModel.VehiculoId = piloto.VehiculoId;
             viewModel.Vehiculo = piloto.Vehiculo;
 

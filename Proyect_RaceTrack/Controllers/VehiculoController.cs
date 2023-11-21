@@ -118,8 +118,6 @@ namespace Proyect_RaceTrack.Controllers
             {
                 return NotFound();
             }
-            //ModelState.Remove("Locales");
-            //ModelState.Remove("Talles");
             if (ModelState.IsValid)
             {
                 try

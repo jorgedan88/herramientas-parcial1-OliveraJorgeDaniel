@@ -19,6 +19,7 @@ namespace Proyect_RaceTrack.ViewModels.PistaViewModels
         public string? PistaNombre {get;set;}
         [Display(Name = "Nomenclatura")]
         public int PistaCodigo { get; set; }
+        [Display(Name = "Material")]
         public PistaType PistaMaterial { get; set; }
         [Display(Name = "Iluminacion")]
         public bool PistaIluminacion {get;set;} = true;

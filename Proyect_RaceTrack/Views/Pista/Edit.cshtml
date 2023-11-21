@@ -45,11 +45,13 @@
             </div>
 @* Visualizacion de relacion muchos a muchos *@
 
-
+            <select class="form-select" aria-label="Default select example" multiple asp-for="Cocheras" id="Cocheras"
+                asp-items="ViewBag.Cocheras" placeholder="select members" class="form-control w-50 dropdown">
+            </select>
 
 @* Visualizacion de relacion muchos a muchos *@
             <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <input type="submit" value="Guardar cambios" class="btn btn-primary" />
             </div>
         </form>
     </div>
