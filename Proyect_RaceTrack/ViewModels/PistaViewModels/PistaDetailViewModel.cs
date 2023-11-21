@@ -15,6 +15,8 @@ public class PistaDetailViewModel{
         public string? PistaNombre {get;set;}
         [Display(Name = "Pista codigo")]
         public int PistaCodigo { get; set; }
+
+        [Display(Name = "Material")]
         public PistaType PistaMaterial { get; set; }
         [Display(Name = "Iluminacion")]
         public bool PistaIluminacion {get;set;} = true;
@@ -22,7 +24,6 @@ public class PistaDetailViewModel{
         public bool PistaAprovisionamiento {get;set;} = true;
 
         public int CocheraId {get; set;}
-        //        [Display(Name = "Tipo de aeronave")]
         public List<Cochera>? Cocheras {get;set;}
-        //public string? CocheraNombre { get; set; }
+
 }

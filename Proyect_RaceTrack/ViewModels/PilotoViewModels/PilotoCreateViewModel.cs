@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Proyect_RaceTrack.Models;
-//using herramientas_parcial1_OliveraJorgeDaniel.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
