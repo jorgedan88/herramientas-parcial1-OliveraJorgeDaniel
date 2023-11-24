@@ -41,7 +41,11 @@ public class CocheraService : ICocheraService
 
         if (!string.IsNullOrEmpty(NameFilterCoc))
         {
-            query = query.Where(x => x.CocheraNombre.Contains(NameFilterCoc) || x.CocheraNumero.ToString() == NameFilterCoc);
+            var filterUpper = NameFilterCoc.ToUpper();
+            query = query.Where(x =>
+                x.CocheraNombre.ToUpper().Contains(filterUpper) ||
+                x.CocheraNumero.ToString() == filterUpper
+            );
         }
         return query.ToList();
 

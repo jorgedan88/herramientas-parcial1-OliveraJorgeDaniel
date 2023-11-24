@@ -41,7 +41,12 @@ public class PistaService : IPistaService
 
         if (!string.IsNullOrEmpty(nameFilterPista))
         {
-                query = query.Where(x => x.PistaNombre.Contains(nameFilterPista) || x.PistaCodigo.ToString() == nameFilterPista);
+            //query = query.Where(x => x.PistaNombre.Contains(nameFilterPista) || x.PistaCodigo.ToString() == nameFilterPista);
+            var filterUpper = nameFilterPista.ToUpper();
+            query = query.Where(x =>
+                x.PistaNombre.ToUpper().Contains(filterUpper) ||
+                x.PistaCodigo.ToString() == filterUpper
+            );
         }
         return query.ToList();
     }

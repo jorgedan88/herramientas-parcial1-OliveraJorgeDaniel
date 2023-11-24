@@ -41,7 +41,11 @@ public class VehiculoService : IVehiculoService
 
         if (!string.IsNullOrEmpty(NameFilterVeh))
         {
-            query = query.Where(x => x.VehiculoTipo.Contains(NameFilterVeh) || x.VehiculoMatricula.Contains(NameFilterVeh));
+            var filterUpper = NameFilterVeh.ToUpper();
+            query = query.Where(x =>
+                x.VehiculoTipo.ToUpper().Contains(filterUpper) ||
+                x.VehiculoMatricula.ToUpper().Contains(filterUpper)
+            );
         }
         return query.ToList();
 
