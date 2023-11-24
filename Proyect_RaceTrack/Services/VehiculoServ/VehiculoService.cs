@@ -34,7 +34,7 @@ public class VehiculoService : IVehiculoService
         var query = from vehiculo in _context.Vehiculo select vehiculo;
         return query.ToList();
     }
-    //OJO QUE ESTO ESTA AGREGADO DE PRUEBA
+
     public List<Vehiculo> GetAll(string NameFilterVeh)
     {
         var query = from vehiculo in _context.Vehiculo select vehiculo;
@@ -51,16 +51,10 @@ public class VehiculoService : IVehiculoService
 
     }
 
-    // public void GetById(Aeronave obj)
-    // {
-    //     throw new NotImplementedException();
-    // }
-
-    //GET by Id
     public Vehiculo? GetById(int id)
     {
         var vehiculo = _context.Vehiculo
-        //var vehiculo = GetQuery()
+
             .FirstOrDefault(m => m.VehiculoId == id);
         return vehiculo;
     }

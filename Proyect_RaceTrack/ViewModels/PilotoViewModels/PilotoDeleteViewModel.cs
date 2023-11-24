@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Threading.Tasks;
 using Proyect_RaceTrack.Models;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,7 +9,6 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
 {
     public class PilotoDeleteViewModel
     {
-        //public List<Piloto> pilotos { get; set; } = new List<Piloto>();
         public String? NameFilter { get; set; }
         public int PilotoId { get; set; }
 
@@ -44,8 +43,6 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
 
         [Display(Name = "Vehiculo asignado")]
         public int VehiculoId { get; set; }
-
-        //public int VehiculoTipo { get; set; }
         public virtual Vehiculo? Vehiculo { get; set; }
 
     }

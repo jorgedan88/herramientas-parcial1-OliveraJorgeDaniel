@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Proyect_RaceTrack.Models;
 
@@ -9,9 +9,7 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
 {
     public class PilotoEditViewModel
     {
-        public int PilotoId { get; set; }
-        //public List<Piloto> pilotos { get; set; } = new List<Piloto>();
-        //public String? NameFilter { get; set; }
+        public int PilotoId { get; set; } 
 
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "Debe ingresar el nombre del piloto")]

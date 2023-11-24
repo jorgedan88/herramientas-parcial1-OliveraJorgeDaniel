@@ -1,14 +1,5 @@
-//using Proyect_RaceTrack.ViewModels;
-//using Proyect_RaceTrack.ViewModels.PistaViewModels;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Proyect_RaceTrack.Data;
 using Proyect_RaceTrack.Models;
 
 using Proyect_RaceTrack.Services;
@@ -45,7 +36,6 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var vehiculo = _vehiculoService.GetById(id.Value);
-            // .FirstOrDefaultAsync(m => m.AeronaveId == id);
             if (vehiculo == null)
             {
                 return NotFound();
@@ -67,8 +57,6 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // POST: Vehiculo/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo, VehiculoCosto")] VehiculoCreateViewModel vehiculoView)
@@ -108,8 +96,6 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // POST: Vehiculo/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("VehiculoId,VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo, VehiculoCosto")] Vehiculo vehiculo)
@@ -183,48 +169,6 @@ namespace Proyect_RaceTrack.Controllers
         private bool VehiculoExists(int id)
         {
             return _vehiculoService.GetById(id) != null;
-        }
-        //FUNCIONALIDAD /
-        public IActionResult UpdatePrice(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var vehiculo = _vehiculoService.GetById(id.Value);
-            if (vehiculo == null)
-            {
-                return NotFound();
-            }
-
-            var viewModel = new MenuUpdatePriceViewModel
-            {
-                VehiculoCosto = vehiculo.VehiculoCosto,
-                VehiculoId = vehiculo.VehiculoId,
-                VehiculoTipo = vehiculo.VehiculoTipo,
-            };
-
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult UpdatePrice(MenuUpdatePriceViewModel model)
-        {//Analisar desde aca por el null de vehiculo
-            var vehiculo = _vehiculoService.GetById(model.VehiculoId);
-            if (vehiculo == null)
-            {
-                return NotFound();
-            }
-            if (model.Cantidad > 0)
-            {
-                vehiculo.VehiculoCosto = (model.Cantidad * vehiculo.VehiculoCosto) + model.Instruccion;
-                _vehiculoService.Update(vehiculo); 
-            }
-
-            return RedirectToAction("Index");
-        }
-
+        }   
     }
 }

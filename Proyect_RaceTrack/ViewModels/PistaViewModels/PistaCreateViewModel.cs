@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Proyect_RaceTrack.Models;
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Threading.Tasks;
+// using Proyect_RaceTrack.Models;
 using System.ComponentModel.DataAnnotations;
 using Proyect_RaceTrack.Utils;
 
@@ -27,8 +27,5 @@ namespace Proyect_RaceTrack.ViewModels.PistaViewModels
         public bool PistaAprovisionamiento { get; set; } = true;
         [Display(Name = "Cocheras asignadas")]
         public List<int>? CocheraIds { get; set; }
-
-
-        //public virtual List<Cochera> Cocheras { get; set; }
     }
 }

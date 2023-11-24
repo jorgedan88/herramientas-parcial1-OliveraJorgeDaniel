@@ -11,9 +11,6 @@ namespace Proyect_RaceTrack.ViewModels.VehiculoViewModels
     {
 
         public int VehiculoId { get; set; }
-        //public List<Vehiculo> vehiculos { get; set; } = new List<Vehiculo>();
-
-        //public String? NameFilter { get; set; }
 
         [Display(Name = "Nombre Propietario")]
         [Required(ErrorMessage = "Debe ingresar el nombre del propietario")]
@@ -35,8 +32,7 @@ namespace Proyect_RaceTrack.ViewModels.VehiculoViewModels
 
         [Display(Name = "Matricula")]
         [Required(ErrorMessage = "Debe ingresar el numero de matricula")]
-        // [MinLength(3, ErrorMessage = "El nombre ingresado debe poseer mas de tres letras")]  
-        // [MaxLength(15)] 
+
         [MinLength(6, ErrorMessage = "La matricula debe contener al menos 6 caracteres")]
         [MaxLength(7)]
         public string? VehiculoMatricula { get; set; }
