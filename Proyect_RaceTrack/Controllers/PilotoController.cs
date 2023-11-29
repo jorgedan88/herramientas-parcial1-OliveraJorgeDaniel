@@ -102,39 +102,47 @@ namespace Proyect_RaceTrack.Controllers
             {
                 return NotFound();
             }
-            return View(piloto);
+
+
+            var viewModel = new PilotoEditViewModel();
+            viewModel.PilotoNombre = piloto.PilotoNombre;
+            viewModel.PilotoApellido = piloto.PilotoApellido;
+            viewModel.PilotoDni = piloto.PilotoDni;
+            viewModel.PilotoNumeroLicencia = piloto.PilotoNumeroLicencia;
+            viewModel.PilotoExpedicion = piloto.PilotoExpedicion;
+            viewModel.PilotoPropietario = piloto.PilotoPropietario;
+            viewModel.VehiculoId = piloto.VehiculoId;
+            viewModel.Vehiculo = piloto.Vehiculo;
+            return View(viewModel);
+
+            //return View(piloto);
         }
         // POST: Instructor/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("PilotoId, PilotoNombre, PilotoApellido, PilotoDni, PilotoNumeroLicencia, PilotoExpedicion, PilotoPropietar, VehiculoId")] Piloto piloto)
+        public IActionResult Edit(int id, [Bind("PilotoId, PilotoNombre, PilotoApellido, PilotoDni, PilotoNumeroLicencia, PilotoExpedicion, PilotoPropietar, VehiculoId")] PilotoEditViewModel pilotoView)
         {
-            if (id != piloto.PilotoId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                var piloto = new Piloto
                 {
-                    _pilotoService.Update(piloto);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PilotoExists(piloto.PilotoId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                    PilotoId = pilotoView.PilotoId,
+                    PilotoNombre = pilotoView.PilotoNombre,
+                    PilotoApellido = pilotoView.PilotoApellido,
+                    PilotoDni = pilotoView.PilotoDni,
+                    PilotoNumeroLicencia = pilotoView.PilotoNumeroLicencia,
+                    PilotoExpedicion = pilotoView.PilotoExpedicion,
+                    PilotoPropietario = pilotoView.PilotoPropietario,
+                    VehiculoId = pilotoView.VehiculoId,
+                    Vehiculo = pilotoView.Vehiculo
+                };
+
+                _pilotoService.Update(piloto);
+
+                return RedirectToAction("Index");
             }
 
-            return View(piloto);
+            return View(pilotoView);
         }
 
         // GET: Instructor/Delete/5
