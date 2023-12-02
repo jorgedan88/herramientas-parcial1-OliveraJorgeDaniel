@@ -95,38 +95,40 @@ namespace Proyect_RaceTrack.Controllers
             {
                 return NotFound();
             }
-            return View(pista);
+
+            var viewModel = new PistaEditViewModel();
+            viewModel.PistaId = pista.PistaId;
+            viewModel.PistaNombre = pista.PistaNombre;
+            viewModel.PistaCodigo = pista.PistaCodigo;
+            viewModel.PistaMaterial = pista.PistaMaterial;
+            viewModel.PistaIluminacion = pista.PistaIluminacion;
+            viewModel.PistaAprovisionamiento = pista.PistaAprovisionamiento;
+            viewModel.CocheraIds = pista.Cocheras.Select(c => c.CocheraId).ToList();
+            return View(viewModel);
         }
 
         // POST: Pista/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento,Cocheras")] Pista pista)
+        public IActionResult Edit(int id, [Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento,Cocheras")] PistaEditViewModel pistaView)
         {
-            if (id != pista.PistaId)
-            {
-                return NotFound();
-            }
             if (ModelState.IsValid)
             {
-                try
+                var pista = new Pista
                 {
-                    _pistaService.Update(pista);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PistaExists(pista.PistaId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                    PistaId = pistaView.PistaId,
+                    PistaNombre = pistaView.PistaNombre,
+                    PistaCodigo = pistaView.PistaCodigo,
+                    PistaMaterial = pistaView.PistaMaterial,
+                    PistaIluminacion = pistaView.PistaIluminacion,
+                    PistaAprovisionamiento = pistaView.PistaAprovisionamiento,
+                };
+
+                _pistaService.Update(pista);
+
+                return RedirectToAction("Index");
             }
-            return View(pista);
+            return View(pistaView);
         }
 
         // GET: Pista/Delete/5

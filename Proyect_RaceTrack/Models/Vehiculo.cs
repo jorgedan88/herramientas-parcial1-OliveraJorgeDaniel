@@ -14,7 +14,6 @@ namespace Proyect_RaceTrack.Models
         public string? VehiculoTipo { get; set; }
         public string? VehiculoMatricula { get; set; }
         public DateTime VehiculoFabricacion { get; set; }
-        public int VehiculoCosto { get; set; }
         public ICollection<Piloto> PilotoList { get; set; } = new List<Piloto>();
     }
 }

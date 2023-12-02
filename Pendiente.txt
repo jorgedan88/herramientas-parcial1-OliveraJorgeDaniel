@@ -1,0 +1,3 @@
+Se logra implementar viewModels en editPista (satisfactorio) y editCochera (no encuenrtra el index al hacer el post)
+Se repara el vehiculo edit (GET y POST), Se logra reparar la pantalla "No se encontro el ID"
+Resolver POST Pista y POST cochera

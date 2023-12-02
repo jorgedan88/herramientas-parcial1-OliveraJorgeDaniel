@@ -59,7 +59,7 @@ namespace Proyect_RaceTrack.Controllers
         // POST: Vehiculo/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo, VehiculoCosto")] VehiculoCreateViewModel vehiculoView)
+        public IActionResult Create([Bind("VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] VehiculoCreateViewModel vehiculoView)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace Proyect_RaceTrack.Controllers
                     VehiculoMatricula = vehiculoView.VehiculoMatricula,
                     VehiculoFabricacion = vehiculoView.VehiculoFabricacion,
                     VehiculoTipo = vehiculoView.VehiculoTipo,
-                    VehiculoCosto = vehiculoView.VehiculoCosto
+                    // VehiculoCosto = vehiculoView.VehiculoCosto
                 };
 
                 _vehiculoService.Create(vehiculo);
@@ -82,7 +82,18 @@ namespace Proyect_RaceTrack.Controllers
         // GET: Vehiculo/Edit/5
         public IActionResult Edit(int? id)
         {
-            
+            // if (id == null)
+            // {
+            //     return NotFound();
+            // }
+
+            // var vehiculo = _vehiculoService.GetById(id.Value);
+            // if (vehiculo == null)
+            // {
+            //     return NotFound();
+            // }
+            // return View(vehiculo);
+
             if (id == null)
             {
                 return NotFound();
@@ -95,13 +106,14 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var viewModel = new VehiculoEditViewModel();
+            viewModel.VehiculoId = vehiculo.VehiculoId;
             viewModel.VehiculoNombre = vehiculo.VehiculoNombre;
             viewModel.VehiculoApellido = vehiculo.VehiculoApellido;
             viewModel.VehiculoMatricula = vehiculo.VehiculoMatricula;
-            viewModel.VehiculoTipo = vehiculo.VehiculoTipo;
             viewModel.VehiculoFabricacion = vehiculo.VehiculoFabricacion;
+            viewModel.VehiculoTipo = vehiculo.VehiculoTipo;
+
             return View(viewModel);
-            // return View(vehiculo);
         }
 
         // POST: Vehiculo/Edit/5
@@ -109,23 +121,38 @@ namespace Proyect_RaceTrack.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("VehiculoId,VehiculoNombre,VehiculoApellido,VehiculoMatricula,VehiculoFabricacion, VehiculoTipo")] VehiculoEditViewModel vehiculoView)
         {
-            if (ModelState.IsValid)
+            if (id != vehiculoView.VehiculoId)
             {
-                var vehiculo = new Vehiculo
-                {
-                    VehiculoId = vehiculoView.VehiculoId,
-                    VehiculoNombre = vehiculoView.VehiculoNombre,
-                    VehiculoApellido = vehiculoView.VehiculoApellido,
-                    VehiculoTipo = vehiculoView.VehiculoTipo,
-                    VehiculoMatricula = vehiculoView.VehiculoMatricula,
-                    VehiculoFabricacion = vehiculoView.VehiculoFabricacion,
-                };
-
-                _vehiculoService.Update(vehiculo);
-
-                return RedirectToAction("Index"); 
+                return NotFound();
             }
 
+            if (ModelState.IsValid)
+            {
+                var vehiculo = new Vehiculo();
+                vehiculo.VehiculoId = vehiculoView.VehiculoId;
+                vehiculo.VehiculoNombre = vehiculoView.VehiculoNombre;
+                vehiculo.VehiculoApellido = vehiculoView.VehiculoApellido;
+                vehiculo.VehiculoMatricula = vehiculoView.VehiculoMatricula;
+                vehiculo.VehiculoFabricacion = vehiculoView.VehiculoFabricacion;
+                vehiculo.VehiculoTipo = vehiculoView.VehiculoTipo;
+            
+                try
+                {
+                _vehiculoService.Update(vehiculo);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!VehiculoExists(vehiculo.VehiculoId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Index");
+            }
             return View(vehiculoView);
         }
 

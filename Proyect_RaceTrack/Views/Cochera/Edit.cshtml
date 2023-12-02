@@ -1,5 +1,7 @@
-@* @model Proyect_RaceTrack.ViewModels.CocheraViewModels.CocheraEditViewModel; *@
-@model Proyect_RaceTrack.Models.Cochera
+@* model Proyect_RaceTrack.ViewModels.CocheraViewModels.CocheraEditViewModel; *@
+@using Proyect_RaceTrack.ViewModels.CocheraViewModels;
+@model CocheraEditViewModel;
+@* @model Proyect_RaceTrack.Models.Cochera *@
 
 @{
     ViewData["Title"] = "Edit";
@@ -48,12 +50,10 @@
                 </label>
             </div>
             <br>
-
-            <select class="form-select" aria-label="Default select example" multiple asp-for="Pistas" id="Pistas"
+            <select class="form-select" aria-label="Default select example" multiple asp-for="PistaIds" id="Pistas"
                 asp-items="ViewBag.Pistas" placeholder="select members" class="form-control w-50 dropdown">
             </select>
             <br>
-
             <div class="form-group">
                 <input type="submit" value="Guardar cambios" class="btn btn-success" />
             </div>

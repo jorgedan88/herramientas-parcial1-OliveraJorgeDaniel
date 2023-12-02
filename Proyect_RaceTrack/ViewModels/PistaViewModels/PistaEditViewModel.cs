@@ -24,5 +24,7 @@ namespace Proyect_RaceTrack.ViewModels.PistaViewModels
                 [Display(Name = "Aprovisionamiento")]
                 public bool PistaAprovisionamiento { get; set; } = true;
 
+                public List<int>? CocheraIds { get; set; }
+
         }
 }

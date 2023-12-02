@@ -1,6 +1,6 @@
-@* @using Proyect_RaceTrack.ViewModels.PistaViewModels;
-@model PistaEditViewModel; *@
-@model Proyect_RaceTrack.Models.Pista;
+@using Proyect_RaceTrack.ViewModels.PistaViewModels;
+@model PistaEditViewModel;
+@* @model Proyect_RaceTrack.Models.Pista; *@
 
 @{
     ViewData["Title"] = "Edit";
@@ -48,7 +48,7 @@
                 </label>
             </div>
             <br>
-            <select class="form-select" aria-label="Default select example" multiple asp-for="Cocheras" id="Cocheras"
+            <select class="form-select" aria-label="Default select example" multiple asp-for="CocheraIds" id="Cocheras"
                 asp-items="ViewBag.Cocheras" placeholder="select members" class="form-control w-50 dropdown">
             </select>
             <br>
