@@ -1,3 +1,6 @@
 Se logra implementar viewModels en editPista (satisfactorio) y editCochera (no encuenrtra el index al hacer el post)
 Se repara el vehiculo edit (GET y POST), Se logra reparar la pantalla "No se encontro el ID"
 Resolver POST Pista y POST cochera
+
+Se logra corregir el update para el modelo PistaEdit pero no se visualiza el cambio de la relacion en el detail
+Falta corregir la creacion de una cochera al editar un cochera

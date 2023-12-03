@@ -31,11 +31,12 @@
 
 
             <label for="txtCosto">Costo combustible (Lts/$):</label>
-            <input type="number" id="txtCosto" required>
+
+            @*MEJORAR>> Validcion de este campo dede el HTML <input type="number" id="txtCosto" min="0.50" value="0.50">
+            <small class="form-text text-muted">Ingrese un valor mayor a 0.5.</small> *@
             <br>
             <br>
-            <label for="txtCantidad">Consumo (Lts/H):</label>
-            <input type="number" id="txtCantidad" required>
+            @* MEJORAR>> Validcion de este campo dede el HTML <label for="txtCantidad">Consumo (Lts/H):</label> *@
             <br>
             <br>
             <label>Categoria de vehiculo:</label>
@@ -74,12 +75,16 @@
                     const cantidad = parseInt(txtCantidad.value);
                     const opcionOperacion = document.querySelector('input[name="opcionOperacion"]:checked');
 
+                            @* if (costo === 0) {
+                                Ver si si puede mejorar esta validacion desde un alert
+                            } *@
+
                     if (!isNaN(costo) && !isNaN(cantidad) && opcionOperacion) {
                         const operacionValue = opcionOperacion.value;
 
                         let resultado = costo * cantidad;
 
-                        @* Este bloque ejecuta la del suma al valor  según la categoria seleccionada *@
+                        @* Este bloque ejecuta la suma al valor  según la categoria seleccionada *@
                         if (operacionValue === 'opcion1') {
                             resultado += 3000;
                         } else if (operacionValue === 'opcion2') {

@@ -1,7 +1,3 @@
-// using System;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Proyect_RaceTrack.Models;
 
@@ -43,5 +39,6 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
         [Display(Name = "Vehiculo asignado")]
         public int VehiculoId { get; set; }
         public virtual Vehiculo? Vehiculo { get; set; }
+        public List<Piloto> pilotos { get; set; } = new List<Piloto>();
     }
 }

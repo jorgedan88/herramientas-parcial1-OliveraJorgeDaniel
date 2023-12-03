@@ -70,7 +70,6 @@ namespace Proyect_RaceTrack.Controllers
                     VehiculoMatricula = vehiculoView.VehiculoMatricula,
                     VehiculoFabricacion = vehiculoView.VehiculoFabricacion,
                     VehiculoTipo = vehiculoView.VehiculoTipo,
-                    // VehiculoCosto = vehiculoView.VehiculoCosto
                 };
 
                 _vehiculoService.Create(vehiculo);
@@ -82,18 +81,6 @@ namespace Proyect_RaceTrack.Controllers
         // GET: Vehiculo/Edit/5
         public IActionResult Edit(int? id)
         {
-            // if (id == null)
-            // {
-            //     return NotFound();
-            // }
-
-            // var vehiculo = _vehiculoService.GetById(id.Value);
-            // if (vehiculo == null)
-            // {
-            //     return NotFound();
-            // }
-            // return View(vehiculo);
-
             if (id == null)
             {
                 return NotFound();

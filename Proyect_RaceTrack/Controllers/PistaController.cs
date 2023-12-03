@@ -110,28 +110,55 @@ namespace Proyect_RaceTrack.Controllers
         // POST: Pista/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento,Cocheras")] PistaEditViewModel pistaView)
+        public IActionResult Edit(int id, [Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento,CocheraIds")] PistaEditViewModel pistaView)
         {
+            if (id != pistaView.PistaId)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                var pista = new Pista
+                try
                 {
-                    PistaId = pistaView.PistaId,
-                    PistaNombre = pistaView.PistaNombre,
-                    PistaCodigo = pistaView.PistaCodigo,
-                    PistaMaterial = pistaView.PistaMaterial,
-                    PistaIluminacion = pistaView.PistaIluminacion,
-                    PistaAprovisionamiento = pistaView.PistaAprovisionamiento,
-                };
+                    var pista = _pistaService.GetById(id);
 
-                _pistaService.Update(pista);
+                    if (pista == null)
+                    {
+                        return NotFound();
+                    }
 
-                return RedirectToAction("Index");
+                    pista.Cocheras.Clear();
+
+                    pista.PistaNombre = pistaView.PistaNombre;
+                    pista.PistaCodigo = pistaView.PistaCodigo;
+                    pista.PistaMaterial = pistaView.PistaMaterial;
+                    pista.PistaIluminacion = pistaView.PistaIluminacion;
+                    pista.PistaAprovisionamiento = pistaView.PistaAprovisionamiento;
+
+                    var cocheras = _cocheraService.GetAll().Where(c => pistaView.CocheraIds.Contains(c.CocheraId)).ToList();
+
+                    pista.Cocheras.AddRange(cocheras);
+
+                    _pistaService.Update(pista);
+
+                    return RedirectToAction("Index");
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PistaExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
             return View(pistaView);
         }
-
-        // GET: Pista/Delete/5
+        
         public IActionResult Delete(int? id)
         {
             if (id == null)

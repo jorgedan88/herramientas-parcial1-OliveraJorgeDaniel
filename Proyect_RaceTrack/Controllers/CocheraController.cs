@@ -96,42 +96,73 @@ namespace Proyect_RaceTrack.Controllers
 
             var cochera = _cocheraService.GetById(id.Value);
             ViewData["Pistas"] = new SelectList(_pistaService.GetAll(), "PistaId", "PistaNombre");
-            
+
             if (cochera == null)
             {
                 return NotFound();
             }
+
             var viewModel = new CocheraEditViewModel();
+            viewModel.CocheraId = cochera.CocheraId;
             viewModel.CocheraNombre = cochera.CocheraNombre;
             viewModel.CocheraNumero = cochera.CocheraNumero;
             viewModel.CocheraSector = cochera.CocheraSector;
             viewModel.CocheraAptoMantenimiento = cochera.CocheraAptoMantenimiento;
             viewModel.CocheraOficinas = cochera.CocheraOficinas;
-            viewModel.PistaIds = cochera.Pistas.Select(c => c.PistaId).ToList();
+            viewModel.PistaIds = cochera.Pistas.Select(p => p.PistaId).ToList();
             return View(viewModel);
         }
 
         // POST: Cochera/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("CocheraId, CocheraNombre, CocheraNumero, CocheraSector,CocheraAptoMantenimiento,CocheraOficinas,Pistas")] CocheraEditViewModel cocheraView)
+        public IActionResult Edit(int id, [Bind("CocheraId,CocheraNombre,CocheraNumero,CocheraSector,CocheraAptoMantenimiento,CocheraOficinas,PistaIds")] CocheraEditViewModel cocheraView)
         {
+            if (id != cocheraView.CocheraId)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                var cochera = new Cochera
+                try
                 {
-                    CocheraId = cocheraView.CocheraId,
-                    CocheraNombre = cocheraView.CocheraNombre,
-                    CocheraNumero = cocheraView.CocheraNumero,
-                    CocheraSector = cocheraView.CocheraSector,
-                    CocheraAptoMantenimiento = cocheraView.CocheraAptoMantenimiento,
-                    CocheraOficinas = cocheraView.CocheraOficinas,
-                };
+                    var cochera = _cocheraService.GetById(id);
 
-                _cocheraService.Update(cochera);
+                    if (cochera == null)
+                    {
+                        return NotFound();
+                    }
 
-                return RedirectToAction("Index");
+                    cochera.Pistas.Clear();
+
+                    cochera.CocheraNombre = cocheraView.CocheraNombre;
+                    cochera.CocheraNumero = cocheraView.CocheraNumero;
+                    cochera.CocheraSector = cocheraView.CocheraSector;
+                    cochera.CocheraAptoMantenimiento = cocheraView.CocheraAptoMantenimiento;
+                    cochera.CocheraOficinas = cocheraView.CocheraOficinas;
+
+                    var pistas = _pistaService.GetAll().Where(p => cocheraView.PistaIds.Contains(p.PistaId)).ToList();
+
+                    cochera.Pistas.AddRange(pistas);
+
+                    _cocheraService.Update(cochera);
+
+                    return RedirectToAction("Index");
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CocheraExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
+
             return View(cocheraView);
         }
 

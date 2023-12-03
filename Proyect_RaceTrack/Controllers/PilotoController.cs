@@ -97,7 +97,7 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var piloto = _pilotoService.GetById(id.Value);
-            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", "nameFilter");
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo");
             
             if (piloto == null)
             {
@@ -129,35 +129,33 @@ namespace Proyect_RaceTrack.Controllers
             if (ModelState.IsValid)
             {
                 var piloto = new Piloto();
+                piloto.PilotoId = pilotoView.PilotoId;
+                piloto.PilotoNombre = pilotoView.PilotoNombre;
+                piloto.PilotoApellido = pilotoView.PilotoApellido;
+                piloto.PilotoDni = pilotoView.PilotoDni;
+                piloto.PilotoNumeroLicencia = pilotoView.PilotoNumeroLicencia;
+                piloto.PilotoExpedicion = pilotoView.PilotoExpedicion;
+                piloto.PilotoPropietario = pilotoView.PilotoPropietario;
+                piloto.VehiculoId = pilotoView.VehiculoId;
+                piloto.Vehiculo =pilotoView.Vehiculo;
+
+                try
                 {
-                    piloto.PilotoId = pilotoView.PilotoId;
-                    piloto.PilotoNombre = pilotoView.PilotoNombre;
-                    piloto.PilotoApellido = pilotoView.PilotoApellido;
-                    piloto.PilotoDni = pilotoView.PilotoDni;
-                    piloto.PilotoNumeroLicencia = pilotoView.PilotoNumeroLicencia;
-                    piloto.PilotoExpedicion = pilotoView.PilotoExpedicion;
-                    piloto.PilotoPropietario = pilotoView.PilotoPropietario;
-                    piloto.VehiculoId = pilotoView.VehiculoId;
-
-                    try
-                    {
-                        _pilotoService.Update(piloto);
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-                        if (!PilotoExists(piloto.PilotoId))
-                        {
-                            return NotFound();
-                        }
-                        else
-                        {
-                            throw;
-                        }
-                    }
-                    return RedirectToAction(nameof(Index));
+                _pilotoService.Update(piloto);
                 }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PilotoExists(piloto.PilotoId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Index");
             }
-
             return View(pilotoView);
         }
 

@@ -43,6 +43,7 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
 
         [Display(Name = "Vehiculo asignado")]
         public int VehiculoId { get; set; }
+        public virtual Vehiculo? Vehiculo { get; set; }
         public List<Piloto> pilotos { get; set; } = new List<Piloto>();
     }
 }
