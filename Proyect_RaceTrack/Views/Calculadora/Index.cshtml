@@ -31,12 +31,14 @@
 
 
             <label for="txtCosto">Costo combustible (Lts/$):</label>
-
-            @*MEJORAR>> Validcion de este campo dede el HTML <input type="number" id="txtCosto" min="0.50" value="0.50">
-            <small class="form-text text-muted">Ingrese un valor mayor a 0.5.</small> *@
+            <input type="number" id="txtCosto" min="0.50" value="0.50">
+            <small class="form-text text-muted">Ingrese un valor mayor a 0.5.</small>
             <br>
             <br>
-            @* MEJORAR>> Validcion de este campo dede el HTML <label for="txtCantidad">Consumo (Lts/H):</label> *@
+            <label for="txtCantidad">Consumo (Lts/H):</label>
+            <input type="number" id="txtCantidad" min="1" value="1"
+                onmousedown="if(this.hasAttribute('readonly')) { this.removeAttribute('readonly'); }">
+            <small class="form-text text-muted">Utilice las flechas para ajustar el valor.</small>
             <br>
             <br>
             <label>Categoria de vehiculo:</label>
@@ -75,9 +77,10 @@
                     const cantidad = parseInt(txtCantidad.value);
                     const opcionOperacion = document.querySelector('input[name="opcionOperacion"]:checked');
 
-                            @* if (costo === 0) {
-                                Ver si si puede mejorar esta validacion desde un alert
-                            } *@
+                            if (costo === 0) {
+                                alert('El costo del combustible no puede ser 0. Por favor, ingrese un valor mayor a 0.');
+                                return;
+                            }
 
                     if (!isNaN(costo) && !isNaN(cantidad) && opcionOperacion) {
                         const operacionValue = opcionOperacion.value;
