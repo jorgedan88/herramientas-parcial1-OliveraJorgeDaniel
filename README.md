@@ -97,7 +97,24 @@ Caso ejemplo:<br>
 a. Se ingresa un costo de combustible de 20 con un consumo por hora de 1<br>
 b. Se seleccionar la categoria Monoplaza la cual le agrega al cálculo 3000<br>
 c. Se solicita la asistencia de un instructor lo cual le agrega al cálculo 5000<br>
+
 d. El costo de la hora de pista libre debe ser de 8020.00<br>
+   </details>
+   <hr>
+
+   ## Gestion de roles para usuarios del sistema  💻 
+   
+<details>
+    <summary>Click Aquí para Detalle ↩️</summary>
+    <br>
+   <p>Roles disponibles en el sistema:</p>
+<ul>
+  <li>Piloto: <a href="https://getbootstrap.com/docs/">Enlace a la documentación oficial</a></li>
+  <li>Propietario: <a href="https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-5.0">Enlace a la documentación oficial</a></li>
+  <li>Encargado de pista: <a href="https://docs.microsoft.com/en-us/dotnet/csharp/">Enlace a la documentación oficial</a></li>
+<li>Administrador: <a href="https://docs.microsoft.com/en-us/dotnet/csharp/">Enlace a la documentación oficial</a></li>
+</ul>
+
    </details>
    <hr>
 
