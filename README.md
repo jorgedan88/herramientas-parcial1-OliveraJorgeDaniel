@@ -8,9 +8,12 @@ En este repositorio se encuentra el proyecto correspondiente al segundo parcial,
 ## Contenido
 1. [Informacion general](#general-info)
 2. [Tecnologias](#technologies)
-3. [Instalacion](#installation)
+3. [Instalacion](#installation) 
+4. [Funcionalidad](#functionality)
+5. [Gestion de roles](#roles)
 
 
+<a name="general-info"></a>
 ## Informacion General 
 ***
 La aplicación perteneciente al autodromo "Racer Track" tiene como objetivo la gestión de pistas y  nomina de pilotos/propietarios de vehiculos para su uso dentro del autodromo (desde sus datos personales hasta la asignación de vehiculos, pistas y cocheras.  El proyecto se encuentra aun aun en proceso de desarrollo pero ya cuenta con los siguientes ABM donde se puede crear, editar, observar detalle y eliminar registros, una funcionalidad de autenticacion y registro de usuarios llegando hasta el desarrollo de una funcionalidad de calculo de costos para el uso de la pista libre por horas. 
@@ -24,6 +27,7 @@ La aplicación perteneciente al autodromo "Racer Track" tiene como objetivo la g
    </details>
    <hr>
 
+<a name="technologies"></a> 
    ## Tecnologías Utilizadas  💻 
    
 <details>
@@ -39,7 +43,7 @@ La aplicación perteneciente al autodromo "Racer Track" tiene como objetivo la g
    </details>
    <hr>
 
-   
+ <a name="#installation"></a>  
 ## Instalacion del proyecto
 ***
 Clonar el proyecto desde la siguiente URL de Github. 
@@ -68,6 +72,7 @@ dotnet run
 
 ```
 
+ <a name="#functionality"></a>  
    ## Calculo de pista libre  📖🖍️
 
 
@@ -102,6 +107,7 @@ d. El costo de la hora de pista libre debe ser de 8020.00<br>
    </details>
    <hr>
 
+ <a name="#roles"></a>  
    ## Gestion de roles para usuarios del sistema  💻 
    
 <details>
