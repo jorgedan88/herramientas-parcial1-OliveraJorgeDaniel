@@ -43,7 +43,7 @@ La aplicación perteneciente al autodromo "Racer Track" tiene como objetivo la g
    </details>
    <hr>
 
- <a name="#installation"></a>  
+ <a name="installation"></a>  
 ## Instalacion del proyecto
 ***
 Clonar el proyecto desde la siguiente URL de Github. 
@@ -72,7 +72,7 @@ dotnet run
 
 ```
 
- <a name="#functionality"></a>  
+ <a name="functionality"></a>  
    ## Calculo de pista libre  📖🖍️
 
 
@@ -107,7 +107,7 @@ d. El costo de la hora de pista libre debe ser de 8020.00<br>
    </details>
    <hr>
 
- <a name="#roles"></a>  
+ <a name="roles"></a>  
    ## Gestion de roles para usuarios del sistema  💻 
    
 <details>
