@@ -45,4 +45,45 @@ public class RolesController : Controller
 
         return RedirectToAction("Index");
     }
+    // GET: Rol/Edit
+    [HttpGet]
+    public async Task<IActionResult> Edit(string id)
+    {
+        var role = await _roleManager.FindByIdAsync(id);
+
+        if (role == null)
+        {
+            return NotFound();
+        }
+
+        var model = new RoleEditViewModel
+        {
+            RoleId = role.Id,
+            RoleName = role.Name
+        };
+
+        return View(model);
+    }
+
+    // POST: Rol/Edit
+    [HttpPost]
+    public async Task<IActionResult> Edit(RoleEditViewModel model)
+    {
+        if (string.IsNullOrEmpty(model.RoleName))
+        {
+            return View(model);
+        }
+
+        var role = await _roleManager.FindByIdAsync(model.RoleId);
+
+        if (role == null)
+        {
+            return NotFound();
+        }
+
+        role.Name = model.RoleName;
+        await _roleManager.UpdateAsync(role);
+
+        return RedirectToAction("Index");
+    }
 }
