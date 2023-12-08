@@ -8,9 +8,12 @@ En este repositorio se encuentra el proyecto correspondiente al segundo parcial,
 ## Contenido
 1. [Informacion general](#general-info)
 2. [Tecnologias](#technologies)
-3. [Instalacion](#installation)
+3. [Instalacion](#installation) 
+4. [Funcionalidad](#functionality)
+5. [Gestion de roles](#roles)
 
 
+<a name="general-info"></a>
 ## Informacion General 
 ***
 La aplicación perteneciente al autodromo "Racer Track" tiene como objetivo la gestión de pistas y  nomina de pilotos/propietarios de vehiculos para su uso dentro del autodromo (desde sus datos personales hasta la asignación de vehiculos, pistas y cocheras.  El proyecto se encuentra aun aun en proceso de desarrollo pero ya cuenta con los siguientes ABM donde se puede crear, editar, observar detalle y eliminar registros, una funcionalidad de autenticacion y registro de usuarios llegando hasta el desarrollo de una funcionalidad de calculo de costos para el uso de la pista libre por horas. 
@@ -24,6 +27,7 @@ La aplicación perteneciente al autodromo "Racer Track" tiene como objetivo la g
    </details>
    <hr>
 
+<a name="technologies"></a> 
    ## Tecnologías Utilizadas  💻 
    
 <details>
@@ -39,7 +43,7 @@ La aplicación perteneciente al autodromo "Racer Track" tiene como objetivo la g
    </details>
    <hr>
 
-   
+ <a name="installation"></a>  
 ## Instalacion del proyecto
 ***
 Clonar el proyecto desde la siguiente URL de Github. 
@@ -68,6 +72,7 @@ dotnet run
 
 ```
 
+ <a name="functionality"></a>  
    ## Calculo de pista libre  📖🖍️
 
 
@@ -97,7 +102,25 @@ Caso ejemplo:<br>
 a. Se ingresa un costo de combustible de 20 con un consumo por hora de 1<br>
 b. Se seleccionar la categoria Monoplaza la cual le agrega al cálculo 3000<br>
 c. Se solicita la asistencia de un instructor lo cual le agrega al cálculo 5000<br>
+
 d. El costo de la hora de pista libre debe ser de 8020.00<br>
+   </details>
+   <hr>
+
+ <a name="roles"></a>  
+   ## Gestion de roles para usuarios del sistema  💻 
+   
+<details>
+    <summary>Click Aquí para Detalle ↩️</summary>
+    <br>
+   <p>Roles disponibles en el sistema:</p>
+<ul>
+  <li>Piloto: <a href="https://getbootstrap.com/docs/">Enlace a la documentación oficial</a></li>
+  <li>Propietario: <a href="https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-5.0">Enlace a la documentación oficial</a></li>
+  <li>Encargado de pista: <a href="https://docs.microsoft.com/en-us/dotnet/csharp/">Enlace a la documentación oficial</a></li>
+<li>Administrador: <a href="https://docs.microsoft.com/en-us/dotnet/csharp/">Enlace a la documentación oficial</a></li>
+</ul>
+
    </details>
    <hr>
 
