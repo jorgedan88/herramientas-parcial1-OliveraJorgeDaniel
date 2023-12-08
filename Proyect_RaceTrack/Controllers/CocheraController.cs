@@ -11,6 +11,7 @@ using Proyect_RaceTrack.ViewModels.CocheraViewModels;
 using Proyect_RaceTrack.Services;
 using Proyect_RaceTrack.ViewModels;
 using Proyect_RaceTrack.ViewModels.PistaViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Proyect_RaceTrack.Controllers
 {
@@ -26,6 +27,8 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Cochera
+        [Authorize(Roles = "Administrador, Jefe De Pista")]
+
         public IActionResult Index(string NameFilterCoc)
         {
             var model = new CocheraIndexViewModel();

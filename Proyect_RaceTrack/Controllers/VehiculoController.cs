@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Proyect_RaceTrack.Models;
@@ -18,6 +19,7 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Vehiculo
+        [Authorize(Roles = "Administrador, Propietario, Jefe De Pista")]
         public IActionResult Index(string NameFilterVeh)
         {
             var model = new VehiculoIndexViewModel();

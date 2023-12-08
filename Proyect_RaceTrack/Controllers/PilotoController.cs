@@ -10,6 +10,7 @@ using Proyect_RaceTrack.Models;
 using Proyect_RaceTrack.ViewModels.PilotoViewModels;
 using Proyect_RaceTrack.Services;
 using Proyect_RaceTrack.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Proyect_RaceTrack.Controllers
 {
@@ -22,8 +23,8 @@ namespace Proyect_RaceTrack.Controllers
             _pilotoService = pilotoService;
             _vehiculoService = vehiculoService;
         }
-
         // GET: Piloto
+        [Authorize(Roles = "Administrador, Propietario, Jefe De Pista")]
         public IActionResult Index(string nameFilterIns)
         {
             var model = new PilotoIndexViewModel();

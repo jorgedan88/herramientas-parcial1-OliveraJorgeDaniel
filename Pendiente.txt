@@ -4,3 +4,5 @@ Resolver POST Pista y POST cochera
 
 Se logra corregir el update para el modelo PistaEdit pero no se visualiza el cambio de la relacion en el detail
 Falta corregir la creacion de una cochera al editar un cochera
+
+2h 31 minutos aplicar roles a los usuarios

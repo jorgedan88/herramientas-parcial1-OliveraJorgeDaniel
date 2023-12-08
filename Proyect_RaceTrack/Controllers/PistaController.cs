@@ -10,6 +10,7 @@ using Proyect_RaceTrack.Models;
 using Proyect_RaceTrack.ViewModels.PistaViewModels;
 using Proyect_RaceTrack.Services;
 using Proyect_RaceTrack.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Proyect_RaceTrack.Controllers
 {
@@ -23,6 +24,7 @@ namespace Proyect_RaceTrack.Controllers
             _cocheraService = cocheraService;
         }
         // GET: Pista
+        [Authorize(Roles = "Administrador, Jefe De Pista")]
         public IActionResult Index(string nameFilterPista, [Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento")] PistaIndexViewModel pistaView)
         {
             var model = new PistaIndexViewModel();
