@@ -24,7 +24,8 @@ namespace Proyect_RaceTrack.Controllers
             _vehiculoService = vehiculoService;
         }
         // GET: Piloto
-        [Authorize(Roles = "Administrador, Propietario, Jefe De Pista")]
+        //Acceso autorizado para todos los perfiles
+        [Authorize(Roles = "Administrador, Propietario, Jefe de pista")]
         public IActionResult Index(string nameFilterIns)
         {
             var model = new PilotoIndexViewModel();
@@ -60,6 +61,7 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Piloto/Create
+        [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Create()
         {
             ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", "nameFilter");
@@ -89,7 +91,8 @@ namespace Proyect_RaceTrack.Controllers
             return View(pilotoView);
         }
 
-        // GET: Instructor/Edit/5      
+        // GET: Instructor/Edit/5  
+        [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -161,6 +164,7 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Instructor/Delete/5
+        [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Delete(int? id)
         {
             if (id == null)

@@ -24,7 +24,7 @@ namespace Proyect_RaceTrack.Controllers
             _cocheraService = cocheraService;
         }
         // GET: Pista
-        [Authorize(Roles = "Administrador, Jefe De Pista")]
+        [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Index(string nameFilterPista, [Bind("PistaId,PistaNombre,PistaCodigo,PistaMaterial,PistaIluminacion,PistaAprovisionamiento")] PistaIndexViewModel pistaView)
         {
             var model = new PistaIndexViewModel();

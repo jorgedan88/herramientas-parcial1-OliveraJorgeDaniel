@@ -19,7 +19,7 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Vehiculo
-        [Authorize(Roles = "Administrador, Propietario, Jefe De Pista")]
+        [Authorize(Roles = "Administrador, Propietario, Jefe de pista")]
         public IActionResult Index(string NameFilterVeh)
         {
             var model = new VehiculoIndexViewModel();
@@ -53,6 +53,7 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Vehiculo/Create
+        [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Create()
         {
             return View();
@@ -81,6 +82,7 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Vehiculo/Edit/5
+        [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -147,6 +149,7 @@ namespace Proyect_RaceTrack.Controllers
 
 
         // GET: Vehiculo/Delete/5
+        [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Delete(int? id)
         {
             if (id == null)

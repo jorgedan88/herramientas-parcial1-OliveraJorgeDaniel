@@ -27,7 +27,7 @@ namespace Proyect_RaceTrack.Controllers
         }
 
         // GET: Cochera
-        [Authorize(Roles = "Administrador, Jefe De Pista")]
+        [Authorize(Roles = "Administrador, Jefe de pista")]
 
         public IActionResult Index(string NameFilterCoc)
         {

@@ -27,7 +27,7 @@ public class UsersController : Controller
         _roleManager = roleManager;
     }
 
-    //[Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador")]
     public IActionResult Index()
     //En este bloque debera listar los usuarios existentes en el index
     {
