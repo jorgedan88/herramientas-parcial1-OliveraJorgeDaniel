@@ -43,7 +43,7 @@ public class VehiculoService : IVehiculoService
         {
             var filterUpper = NameFilterVeh.ToUpper();
             query = query.Where(x =>
-                x.VehiculoTipo.ToUpper().Contains(filterUpper) ||
+                //x.VehiculoTipo.ToUpper().Contains(filterUpper) ||
                 x.VehiculoMatricula.ToUpper().Contains(filterUpper)
             );
         }

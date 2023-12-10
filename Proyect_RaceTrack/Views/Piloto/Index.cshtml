@@ -64,9 +64,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.PilotoNumeroLicencia)
                 </td>
-                <td>
+                @* <td>
                     @Html.DisplayFor(modelItem => item.PilotoExpedicion )
-                </td>
+                </td> *@
+                @* <td>
+                    @item.PilotoExpedicion.ToString("dd/MM/yyyy")
+                </td> *@
                 <td>
                     @Html.DisplayFor(modelItem => item.PilotoPropietario)
                 </td>

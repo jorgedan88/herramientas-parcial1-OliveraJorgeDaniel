@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+// using Proyect_RaceTrack.Utils;
 
 namespace Proyect_RaceTrack.ViewModels.VehiculoViewModels
 {
@@ -19,14 +20,14 @@ namespace Proyect_RaceTrack.ViewModels.VehiculoViewModels
 
         [Display(Name = "Tipo de vehiculo")]
         [Required(ErrorMessage = "Debe ingresar el tipo de vehiculo")]
-        [MinLength(3, ErrorMessage = "El nombre ingresado debe poseer mas de tres letras")]
-        [MaxLength(15)]
-        public string? VehiculoTipo { get; set; }
+        // [MinLength(3, ErrorMessage = "El nombre ingresado debe poseer mas de tres letras")]
+        // [MaxLength(15)]
+        // public VehiculoType VehiculoTipo { get; set; }
 
-        [Display(Name = "Matricula")]
-        [Required(ErrorMessage = "Debe ingresar el numero de matricula")]
-        [MinLength(6, ErrorMessage = "La matricula debe contener al menos 6 caracteres")]
-        [MaxLength(7)]
+        // [Display(Name = "Matricula")]
+        // [Required(ErrorMessage = "Debe ingresar el numero de matricula")]
+        // [MinLength(6, ErrorMessage = "La matricula debe contener al menos 6 caracteres")]
+        // [MaxLength(7)]
         public string? VehiculoMatricula { get; set; }
 
         [Display(Name = "Modelo")]

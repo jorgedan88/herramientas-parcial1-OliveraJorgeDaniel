@@ -64,34 +64,36 @@ namespace Proyect_RaceTrack.Controllers
         [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Create()
         {
-            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", "nameFilter");
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo");
             return View();
         }
 
-        // POST: Instructor/Create
+        // POST: Piloto/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("PilotoId, PilotoNombre, PilotoApellido, PilotoDni, PilotoNumeroLicencia, PilotoExpedicion, PilotoPropietar, VehiculoId")] PilotoCreateViewModel pilotoView)
+        public IActionResult Create([Bind("PilotoId, PilotoNombre, PilotoApellido, PilotoDni, PilotoNumeroLicencia, PilotoExpedicion, PilotoPropietario, VehiculoId")] PilotoCreateViewModel pilotoView)
         {
             if (ModelState.IsValid)
             {
-                var instructor = new Piloto
+                var piloto = new Piloto
                 {
                     PilotoNombre = pilotoView.PilotoNombre,
                     PilotoApellido = pilotoView.PilotoApellido,
                     PilotoDni = pilotoView.PilotoDni,
                     PilotoNumeroLicencia = pilotoView.PilotoNumeroLicencia,
                     PilotoExpedicion = pilotoView.PilotoExpedicion,
+                    PilotoPropietario = pilotoView.PilotoPropietario,
                     VehiculoId = pilotoView.VehiculoId
-
                 };
-                _pilotoService.Create(instructor);
+
+                _pilotoService.Create(piloto);
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo");
             return View(pilotoView);
         }
 
-        // GET: Instructor/Edit/5  
+        // GET: Piloto/Edit/5
         [Authorize(Roles = "Administrador, Jefe de pista")]
         public IActionResult Edit(int? id)
         {
@@ -101,26 +103,31 @@ namespace Proyect_RaceTrack.Controllers
             }
 
             var piloto = _pilotoService.GetById(id.Value);
-            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo");
-            
             if (piloto == null)
             {
                 return NotFound();
             }
 
+            var viewModel = new PilotoEditViewModel
+            {
+                PilotoId = piloto.PilotoId,
+                PilotoNombre = piloto.PilotoNombre,
+                PilotoApellido = piloto.PilotoApellido,
+                PilotoDni = piloto.PilotoDni,
+                PilotoNumeroLicencia = piloto.PilotoNumeroLicencia,
+                PilotoExpedicion = piloto.PilotoExpedicion,
+                PilotoPropietario = piloto.PilotoPropietario,
+                VehiculoId = piloto.VehiculoId,
+                Vehiculo = piloto.Vehiculo
+            };
 
-            var viewModel = new PilotoEditViewModel();
-            viewModel.PilotoNombre = piloto.PilotoNombre;
-            viewModel.PilotoApellido = piloto.PilotoApellido;
-            viewModel.PilotoDni = piloto.PilotoDni;
-            viewModel.PilotoNumeroLicencia = piloto.PilotoNumeroLicencia;
-            viewModel.PilotoExpedicion = piloto.PilotoExpedicion;
-            viewModel.PilotoPropietario = piloto.PilotoPropietario;
-            viewModel.VehiculoId = piloto.VehiculoId;
-            viewModel.Vehiculo = piloto.Vehiculo;
+            // Obtén la lista de vehículos y la establece en el ViewBag
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", viewModel.VehiculoId);
+
             return View(viewModel);
         }
-        // POST: Instructor/Edit/5
+
+        // POST: Piloto/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("PilotoId, PilotoNombre, PilotoApellido, PilotoDni, PilotoNumeroLicencia, PilotoExpedicion, PilotoPropietario, VehiculoId")] PilotoEditViewModel pilotoView)
@@ -132,24 +139,26 @@ namespace Proyect_RaceTrack.Controllers
 
             if (ModelState.IsValid)
             {
-                var piloto = new Piloto();
-                piloto.PilotoId = pilotoView.PilotoId;
-                piloto.PilotoNombre = pilotoView.PilotoNombre;
-                piloto.PilotoApellido = pilotoView.PilotoApellido;
-                piloto.PilotoDni = pilotoView.PilotoDni;
-                piloto.PilotoNumeroLicencia = pilotoView.PilotoNumeroLicencia;
-                piloto.PilotoExpedicion = pilotoView.PilotoExpedicion;
-                piloto.PilotoPropietario = pilotoView.PilotoPropietario;
-                piloto.VehiculoId = pilotoView.VehiculoId;
-                piloto.Vehiculo =pilotoView.Vehiculo;
+                var piloto = new Piloto
+                {
+                    PilotoId = pilotoView.PilotoId,
+                    PilotoNombre = pilotoView.PilotoNombre,
+                    PilotoApellido = pilotoView.PilotoApellido,
+                    PilotoDni = pilotoView.PilotoDni,
+                    PilotoNumeroLicencia = pilotoView.PilotoNumeroLicencia,
+                    PilotoExpedicion = pilotoView.PilotoExpedicion,
+                    PilotoPropietario = pilotoView.PilotoPropietario,
+                    VehiculoId = pilotoView.VehiculoId,
+                    Vehiculo = _vehiculoService.GetById(pilotoView.VehiculoId)
+                };
 
                 try
                 {
-                _pilotoService.Update(piloto);
+                    _pilotoService.Update(piloto);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PilotoExists(piloto.PilotoId))
+                    if (!PilotoExists(id))
                     {
                         return NotFound();
                     }
@@ -160,6 +169,8 @@ namespace Proyect_RaceTrack.Controllers
                 }
                 return RedirectToAction("Index");
             }
+
+            ViewData["VehiculoId"] = new SelectList(_vehiculoService.GetAll(), "VehiculoId", "VehiculoTipo", pilotoView.VehiculoId);
             return View(pilotoView);
         }
 

@@ -59,9 +59,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.VehiculoMatricula)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VehiculoFabricacion)
-                </td>
+                @* <td>
+                    @Html.DisplayFor(modelItem => item.VehiculoFabricacion.Year)
+                </td> *@
 
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.VehiculoId" class="btn btn-warning">Modificar</a>

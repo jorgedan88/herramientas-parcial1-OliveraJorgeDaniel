@@ -36,7 +36,8 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
 
         [Display(Name = "Fecha de vencimiento")]
         [Required(ErrorMessage = "Debe ingresar la fecha de vencimiento")]
-        public DateTime PilotoExpedicion { get; set; }
+        // [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        // public DateTime PilotoExpedicion { get; set; }
 
         [Display(Name = "Es propietario?")]
         public bool PilotoPropietario { get; set; } = true;
