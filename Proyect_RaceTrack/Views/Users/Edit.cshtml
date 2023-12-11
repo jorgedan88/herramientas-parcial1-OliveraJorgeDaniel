@@ -13,7 +13,6 @@
 <div class="row">
     <div class="col-md-4">
         <br>
-        <!-- Agrega la imagen aquí -->
         <img src="https://diputadosbsas.com.ar/wp-content/uploads/2023/06/balcarce-kicillof-autodromo-fangio.jpg"
             alt="Automovilismo" class="img-fluid" />
     </div>
@@ -31,7 +30,6 @@
             <div class="form-group">
                 <label asp-for="Role" class="control-label">Rol asignado</label>
                 <select asp-for="Role" asp-items="Model.Roles" class="form-control">
-                    @* <option value="">Ninguno</option> *@
                 </select>
                 <span asp-validation-for="Role" class="text-danger"></span>
             </div>

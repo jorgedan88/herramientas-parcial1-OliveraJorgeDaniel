@@ -24,10 +24,10 @@ namespace Proyect_RaceTrack.ViewModels.VehiculoViewModels
         // [MaxLength(15)]
         public VehiculoType VehiculoTipo { get; set; }
 
-        // [Display(Name = "Matricula")]
-        // [Required(ErrorMessage = "Debe ingresar el numero de matricula")]
-        // [MinLength(6, ErrorMessage = "La matricula debe contener al menos 6 caracteres")]
-        // [MaxLength(7)]
+        [Display(Name = "Matricula")]
+        [Required(ErrorMessage = "Debe ingresar el numero de matricula")]
+        [MinLength(6, ErrorMessage = "La matricula debe contener al menos 6 caracteres")]
+        [MaxLength(7)]
         public string? VehiculoMatricula { get; set; }
 
         [Display(Name = "Modelo")]

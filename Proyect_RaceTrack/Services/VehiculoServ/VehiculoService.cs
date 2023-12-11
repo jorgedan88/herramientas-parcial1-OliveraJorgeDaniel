@@ -37,18 +37,18 @@ public class VehiculoService : IVehiculoService
 
     public List<Vehiculo> GetAll(string NameFilterVeh)
     {
-        var query = from vehiculo in _context.Vehiculo select vehiculo;
+        IQueryable<Vehiculo> query = _context.Vehiculo;  
 
         if (!string.IsNullOrEmpty(NameFilterVeh))
         {
             var filterUpper = NameFilterVeh.ToUpper();
-            query = query.Where(x =>
-                //x.VehiculoTipo.ToUpper().Contains(filterUpper) ||
-                x.VehiculoMatricula.ToUpper().Contains(filterUpper)
-            );
+            query = query.AsEnumerable().Where(x =>
+                (x.VehiculoTipo != null && x.VehiculoTipo.ToString().ToUpper().Contains(filterUpper)) ||
+                (x.VehiculoMatricula != null && x.VehiculoMatricula.ToUpper().Contains(filterUpper))
+            ).AsQueryable();  
         }
-        return query.ToList();
 
+        return query.ToList();
     }
 
     public Vehiculo? GetById(int id)
