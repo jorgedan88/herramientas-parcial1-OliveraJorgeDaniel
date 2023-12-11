@@ -21,6 +21,7 @@
         <button class="btn btn-info" type="submit">Buscar</button>
     </form>
 </div>
+<br>
 
 <table class="table">
     <thead>
@@ -59,9 +60,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.VehiculoMatricula)
                 </td>
-                @* <td>
+                <td>
                     @Html.DisplayFor(modelItem => item.VehiculoFabricacion.Year)
-                </td> *@
+                </td>
 
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.VehiculoId" class="btn btn-warning">Modificar</a>

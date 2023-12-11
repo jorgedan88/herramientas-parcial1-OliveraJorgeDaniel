@@ -17,12 +17,13 @@
                 <input asp-for="VehiculoNombre" class="form-control" />
                 <span asp-validation-for="VehiculoNombre" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="VehiculoApellido" class="control-label"></label>
                 <input asp-for="VehiculoApellido" class="form-control" />
                 <span asp-validation-for="VehiculoApellido" class="text-danger"></span>
             </div>
-
+            <br>
             @* <div class="form-group">
                 <label asp-for="VehiculoTipo" class="control-label"></label>
                 <input asp-for="VehiculoTipo" class="form-control" />
@@ -40,26 +41,29 @@
                     <option value="5">Roadster</option>
                 </select>
             </div>
-
+            <br>
             <div class="form-group">
                 <label asp-for="VehiculoMatricula" class="control-label"></label>
                 <input asp-for="VehiculoMatricula" class="form-control" />
                 <span asp-validation-for="VehiculoMatricula" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
                 <label asp-for="VehiculoFabricacion" class="control-label"></label>
                 <input type="date" asp-for="VehiculoFabricacion" class="form-control" />
                 <span asp-validation-for="VehiculoFabricacion" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-primary" />
+                <input type="submit" value="Crear Vehiculo" class="btn btn-success" />
             </div>
+            <br>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Volver</a>
+        <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
 </div>
 
 @section Scripts {
