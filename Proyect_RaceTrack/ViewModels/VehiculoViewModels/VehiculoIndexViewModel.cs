@@ -26,7 +26,7 @@ namespace Proyect_RaceTrack.ViewModels.VehiculoViewModels
         [MaxLength(15)]
         public string? VehiculoApellido { get; set; }
 
-        [Display(Name = "Tipo de vehiculo")]
+        [Display(Name = "Tipo de carroceria")]
         [Required(ErrorMessage = "Debe ingresar el tipo de vehiculo")]
         [MinLength(3, ErrorMessage = "El nombre ingresado debe poseer mas de tres letras")]
         [MaxLength(15)]

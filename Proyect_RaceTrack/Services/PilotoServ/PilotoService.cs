@@ -67,9 +67,4 @@ public class PilotoService : IPilotoService
         _context.Update(obj);
         _context.SaveChanges();
     }
-
-    // object IPilotoService.GetAll()
-    // {
-    //     throw new NotImplementedException();
-    // }
 }

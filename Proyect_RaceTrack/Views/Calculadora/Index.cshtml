@@ -10,23 +10,23 @@
 
 <div class="mb-3">
 
-<link rel="stylesheet" href="/Proyect_RaceTrack/wwwroot/js/Logica.js">
+    <link rel="stylesheet" href="/Proyect_RaceTrack/wwwroot/js/Logica.js">
     <div class="col-md-6">
-            <p>
-            <button class="btn btn-info" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                    Como usar la calculadora?
-                </button>
-            </p>
+        <p>
+            <button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
+                aria-expanded="false" aria-controls="collapseWidthExample">
+                Como usar la calculadora?
+            </button>
+        </p>
         <div class="col-md-" style="min-height: 120px;">
-                <div class="collapse collapse-horizontal" id="collapseWidthExample">
-                    <div class="card card-body" style="width: 900px;">
+            <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                <div class="card card-body" style="width: 900px;">
                     Para calcular el costo de la hora de uso de pista libre ingrese el valor del litro de combustible,
                     el consumo del vehículo, la categoría de competición y por último si la hora de uso incluye el
                     acompañamiento de un instructor, para mostrar el valor hora presione el botón calcular.
-                    </div>
                 </div>
-                <br>
+            </div>
+            <br>
             <hr />
 
 
@@ -61,65 +61,65 @@
             <button type="button" id="btnLimpiar" class="btn btn-outline-primary">Limpiar</button>
 
 
-        <script>
-            @* Con este bloque se arma la lógica de la calculadora *@
-            document.addEventListener('DOMContentLoaded', function () {
-                const calculadoraForm = document.getElementById('calculadoraForm');
-                const txtCosto = document.getElementById('txtCosto');
-                const txtCantidad = document.getElementById('txtCantidad');
-                const btnCalcular = document.getElementById('btnCalcular');
-                const txtResultado = document.getElementById('txtResultado');
-                const chkSumar50000 = document.getElementById('chkSumar50000');
-                const btnLimpiar = document.getElementById('btnLimpiar');
+            <script>
+                @* Con este bloque se arma la lógica de la calculadora *@
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const calculadoraForm = document.getElementById('calculadoraForm');
+                        const txtCosto = document.getElementById('txtCosto');
+                        const txtCantidad = document.getElementById('txtCantidad');
+                        const btnCalcular = document.getElementById('btnCalcular');
+                        const txtResultado = document.getElementById('txtResultado');
+                        const chkSumar50000 = document.getElementById('chkSumar50000');
+                        const btnLimpiar = document.getElementById('btnLimpiar');
 
-                btnCalcular.addEventListener('click', function () {
-                    const costo = parseFloat(txtCosto.value);
-                    const cantidad = parseInt(txtCantidad.value);
-                    const opcionOperacion = document.querySelector('input[name="opcionOperacion"]:checked');
+                        btnCalcular.addEventListener('click', function () {
+                            const costo = parseFloat(txtCosto.value);
+                            const cantidad = parseInt(txtCantidad.value);
+                            const opcionOperacion = document.querySelector('input[name="opcionOperacion"]:checked');
 
                             if (costo === 0) {
                                 alert('El costo del combustible no puede ser 0. Por favor, ingrese un valor mayor a 0.');
                                 return;
                             }
 
-                    if (!isNaN(costo) && !isNaN(cantidad) && opcionOperacion) {
-                        const operacionValue = opcionOperacion.value;
+                            if (!isNaN(costo) && !isNaN(cantidad) && opcionOperacion) {
+                                const operacionValue = opcionOperacion.value;
 
-                        let resultado = costo * cantidad;
+                                let resultado = costo * cantidad;
 
-                        @* Este bloque ejecuta la suma al valor  según la categoria seleccionada *@
+                @* Este bloque ejecuta la suma al valor  según la categoria seleccionada *@
                         if (operacionValue === 'opcion1') {
-                            resultado += 3000;
-                        } else if (operacionValue === 'opcion2') {
-                            resultado += 4000; // Suma 4000
-                        } else if (operacionValue === 'opcion3') {
-                            resultado += 4500; // Suma 4500
-                        } else if (operacionValue === 'opcion4') {
-                            resultado += 5500; // Suma 5500
-                        } else if (operacionValue === 'opcion5') {
-                            resultado += 7000; // Suma 7000
-                        }
+                                    resultado += 3000;
+                                } else if (operacionValue === 'opcion2') {
+                                    resultado += 4000; // Suma 4000
+                                } else if (operacionValue === 'opcion3') {
+                                    resultado += 4500; // Suma 4500
+                                } else if (operacionValue === 'opcion4') {
+                                    resultado += 5500; // Suma 5500
+                                } else if (operacionValue === 'opcion5') {
+                                    resultado += 7000; // Suma 7000
+                                }
 
 
-                        @* Este bloque de codigo suma 5000 si el checkbox está marcado (necesita instructor)*@
+                @* Este bloque de codigo suma 5000 si el checkbox está marcado (necesita instructor)*@
                         if (chkSumar50000.checked) {
-                            resultado += 5000;
-                        }
+                                    resultado += 5000;
+                                }
 
-                        txtResultado.value = resultado.toFixed(2);
-                    } else {
-                        alert('Ingrese valores numéricos válidos y seleccione la categoria de vehiculo.');
-                    }
-                });
+                                txtResultado.value = resultado.toFixed(2);
+                            } else {
+                                alert('Ingrese valores numéricos válidos y seleccione la categoria de vehiculo.');
+                            }
+                        });
 
-                    @* Este bloque de codigo es para el boton que limpia todos los campos del formulario. *@
-                btnLimpiar.addEventListener('click', function () {
-                    txtCosto.value = '';
-                    txtCantidad.value = '';
-                    document.querySelector('input[name="opcionOperacion"]:checked').checked = false;
-                    chkSumar50000.checked = false;
-                    txtResultado.value = '';
-                });
-            });
-        </script>
-</div>
+                @* Este bloque de codigo es para el boton que limpia todos los campos del formulario. *@
+                            btnLimpiar.addEventListener('click', function () {
+                                txtCosto.value = '';
+                                txtCantidad.value = '';
+                                document.querySelector('input[name="opcionOperacion"]:checked').checked = false;
+                                chkSumar50000.checked = false;
+                                txtResultado.value = '';
+                            });
+                    });
+            </script>
+        </div>

@@ -20,7 +20,9 @@ namespace Proyect_RaceTrack.ViewModels.PistaViewModels
         public bool PistaIluminacion { get; set; } = true;
         [Display(Name = "Aprovisionamiento")]
         public bool PistaAprovisionamiento { get; set; } = true;
-        [Display(Name = "Cocheras asignadas")]
+        
+        [Display(Name = "Cocheras")]
+        [Required(ErrorMessage = "Debes seleccionar al menos una cochera")]
         public List<int>? CocheraIds { get; set; }
     }
 }

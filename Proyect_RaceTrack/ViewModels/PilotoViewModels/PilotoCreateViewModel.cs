@@ -34,7 +34,7 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
         [Display(Name = "Es propietario?")]
         public bool PilotoPropietario { get; set; } = true;
 
-        [Display(Name = "Vehiculo asignado")]
+        [Display(Name = "Tipo de carrocería")]
         public int VehiculoId { get; set; }
     }
 }

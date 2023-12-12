@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Proyect_RaceTrack.ViewModels.CocheraViewModels
@@ -9,7 +10,6 @@ namespace Proyect_RaceTrack.ViewModels.CocheraViewModels
         [Display(Name = "Nombre de la Cochera")]
         [Required(ErrorMessage = "Debe ingresar el nombre de la cochera")]
         public string? CocheraNombre { get; set; }
-
 
         [Display(Name = "Numero de Cochera")]
         [Required(ErrorMessage = "El numero de cochera es obligatorio")]
@@ -23,6 +23,9 @@ namespace Proyect_RaceTrack.ViewModels.CocheraViewModels
 
         [Display(Name = "Cuenta con oficinas?")]
         public bool CocheraOficinas { get; set; } = true;
+
+        [Display(Name = "Pistas")]
+        [Required(ErrorMessage = "Debe seleccionar al menos una pista")]
         public List<int>? PistaIds { get; set; }
     }
 }

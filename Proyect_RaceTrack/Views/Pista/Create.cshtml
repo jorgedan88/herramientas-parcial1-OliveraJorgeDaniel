@@ -1,5 +1,5 @@
 @using Proyect_RaceTrack.ViewModels.PistaViewModels;
-@model PistaCreateViewModel;
+@model PistaCreateViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -13,16 +13,21 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
                 <label asp-for="PistaNombre" class="control-label"></label>
                 <input asp-for="PistaNombre" class="form-control" />
                 <span asp-validation-for="PistaNombre" class="text-danger"></span>
             </div>
+            <br>
+
             <div class="form-group">
                 <label asp-for="PistaCodigo" class="control-label"></label>
                 <input asp-for="PistaCodigo" class="form-control" />
                 <span asp-validation-for="PistaCodigo" class="text-danger"></span>
             </div>
+            <br>
+
             <div class="form-group">
                 <label asp-for="PistaMaterial" class="control-label"></label>
                 <select asp-for="PistaMaterial" class="form-control">
@@ -32,23 +37,35 @@
                     <option value="3">Hormigon</option>
                 </select>
             </div>
+            <br>
+
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="PistaIluminacion" /> @Html.DisplayNameFor(model => model.PistaIluminacion)
                 </label>
             </div>
+            <br>
+
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="PistaAprovisionamiento" /> @Html.DisplayNameFor(model => model.PistaAprovisionamiento)
                 </label>
             </div>
 
-            <select class="form-select" aria-label="Default select example" multiple asp-for="CocheraIds" id="Cocheras"
-                asp-items="ViewBag.Cocheras" placeholder="select members" class="form-control w-50 dropdown">
-            </select>
+            <div class="form-group">
+                <label asp-for="CocheraIds" class="control-label"></label>
+                <select class="form-select" aria-label="Default select example" multiple asp-for="CocheraIds" id="Cocheras"
+                        asp-items="ViewBag.Cocheras" placeholder="select members" class="form-control w-50 dropdown">
+                    @foreach (var cochera in ViewBag.Cocheras)
+                    {
+                        <option value="@cochera.Value" @(Model.CocheraIds != null && Model.CocheraIds.Contains(int.Parse(cochera.Value)) ? "selected" : "")>
+                            @cochera.Text
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="CocheraIds" class="text-danger"></span>
+            </div>
             <br>
-
-
 
             <div class="form-group">
                 <input type="submit" value="Crear Pista" class="btn btn-success"/>
@@ -56,6 +73,7 @@
         </form>
     </div>
 </div>
+
 <br>
 
 <div>

@@ -5,7 +5,7 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
 {
     public class PilotoEditViewModel
     {
-        public int PilotoId { get; set; } 
+        public int PilotoId { get; set; }
 
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "Debe ingresar el nombre del piloto")]
@@ -36,7 +36,7 @@ namespace Proyect_RaceTrack.ViewModels.PilotoViewModels
         [Display(Name = "Es propietario?")]
         public bool PilotoPropietario { get; set; } = true;
 
-        [Display(Name = "Vehiculo asignado")]
+        [Display(Name = "Tipo de carrocería")]
         public int VehiculoId { get; set; }
         public virtual Vehiculo? Vehiculo { get; set; }
         public List<Piloto> pilotos { get; set; } = new List<Piloto>();

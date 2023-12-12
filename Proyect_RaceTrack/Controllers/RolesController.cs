@@ -22,14 +22,12 @@ public class RolesController : Controller
 
     [Authorize(Roles = "Administrador")]
     public IActionResult Index()
-    //En este bloque debera listar los usuarios existentes en el index
     {
         var roles = _roleManager.Roles.ToList();
         return View(roles);
     }
     // GET: Rol/Create
     public IActionResult Create()
-    //En este bloque debera listar los usuarios existentes en el index
     {
         return View();
     }
