@@ -12,21 +12,18 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
             <div class="form-group">
                 <label asp-for="CocheraNombre" class="control-label"></label>
                 <input asp-for="CocheraNombre" class="form-control" />
                 <span asp-validation-for="CocheraNombre" class="text-danger"></span>
             </div>
             <br>
-
             <div class="form-group">
                 <label asp-for="CocheraNumero" class="control-label"></label>
                 <input asp-for="CocheraNumero" class="form-control" />
                 <span asp-validation-for="CocheraNumero" class="text-danger"></span>
             </div>
             <br>
-
             <div class="form-group">
                 <label asp-for="CocheraSector" class="control-label"></label>
                 <select asp-for="CocheraSector" class="form-control">
@@ -37,36 +34,24 @@
                 </select>
             </div>
             <br>
-
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CocheraAptoMantenimiento" /> @Html.DisplayNameFor(model => model.CocheraAptoMantenimiento)
+                    <input class="form-check-input" asp-for="CocheraAptoMantenimiento" /> @Html.DisplayNameFor(model =>
+                    model.CocheraAptoMantenimiento)
                 </label>
             </div>
             <br>
-
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CocheraOficinas" /> @Html.DisplayNameFor(model => model.CocheraOficinas)
+                    <input class="form-check-input" asp-for="CocheraOficinas" /> @Html.DisplayNameFor(model =>
+                    model.CocheraOficinas)
                 </label>
             </div>
             <br>
-
-            <div class="form-group">
-                <label asp-for="PistaIds" class="control-label"></label>
-                <select class="form-select" aria-label="Default select example" multiple asp-for="PistaIds" id="Pistas"
-                        asp-items="ViewBag.Pistas" placeholder="select members" class="form-control w-50 dropdown">
-                    @foreach (var pista in ViewBag.Pistas)
-                    {
-                        <option value="@pista.Value" @(Model.PistaIds != null && Model.PistaIds.Contains(int.Parse(pista.Value)) ? "selected" : "")>
-                            @pista.Text
-                        </option>
-                    }
-                </select>
-                <span asp-validation-for="PistaIds" class="text-danger"></span>
-            </div>
+            <select class="form-select" aria-label="Default select example" multiple asp-for="PistaIds" id="Pistas"
+                asp-items="ViewBag.Pistas" placeholder="select members" class="form-control w-50 dropdown">
+            </select>
             <br>
-
             <div class="form-group">
                 <input type="submit" value="Crear Cochera" class="btn btn-success" />
             </div>
@@ -74,6 +59,7 @@
         </form>
     </div>
 </div>
+
 
 <div>
     <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
