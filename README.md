@@ -138,6 +138,8 @@ d. El costo de la hora de pista libre debe ser de 8020.00<br>
     <br>
    <p>Roles disponibles en el sistema:</p>
 <ul>
+    <strong> Importante: Al crear un nuevo usuario para que el mismo tenga acceso a los módulos del sistema un administrador deberá asignarle un rol. </strong><br>
+    
 <li>Propietario:</li>
     - Rol que permite al usuario el acceso total a todos lo módulos del sistema y ejecutar todas las acciones de estas pantallas.
 <li>Encargado de pista:</li>
