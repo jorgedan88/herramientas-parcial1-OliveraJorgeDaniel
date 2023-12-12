@@ -8,9 +8,10 @@ En este repositorio se encuentra el proyecto correspondiente al segundo parcial,
 ## Contenido
 1. [Informacion general](#general-info)
 2. [Tecnologias](#technologies)
-3. [Instalacion](#installation) 
-4. [Funcionalidad](#functionality)
-5. [Gestion de roles](#roles)
+3. [Instalacion](#installation)
+4. [Uso de buscadores](#search)
+5. [Funcionalidad](#functionality)
+6. [Gestion de roles](#roles)
 
 
 <a name="general-info"></a>
@@ -72,6 +73,28 @@ dotnet run
 
 ```
 
+<a name="search"></a> 
+   ## Uso de buscadores  💻 
+   
+<details>
+    <summary>Click Aquí para Detalle ↩️</summary>
+    <br>
+   <p>Funcionamiento de buscadores por ABM:</p>
+<ul>
+  <li>Pantalla Pilotos:</li>
+    - Filtra por nombre (case sensitive), apellido (case sensitive) y DNI (Valor exacto)
+  <li>Pantalla Vehiculos:</li>
+    - Funciona por Tipo de vehículo  (case sensitive) y Matrícula (Valor exacto) 
+  <li>Pantalla Cocheras:</li>
+    - Funciona por Nombre (case sensitive) y Numero (Valor exacto)
+  <li>Pantalla Pistas:</li>
+    - Funciona por Nombre (case sensitive) y Nomenclatura (Valor exacto)
+</ul>
+
+   </details>
+   <hr>
+
+
  <a name="functionality"></a>  
    ## Calculo de pista libre  📖🖍️
 
@@ -115,10 +138,12 @@ d. El costo de la hora de pista libre debe ser de 8020.00<br>
     <br>
    <p>Roles disponibles en el sistema:</p>
 <ul>
-  <li>Piloto: <a href="https://getbootstrap.com/docs/">Enlace a la documentación oficial</a></li>
-  <li>Propietario: <a href="https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-5.0">Enlace a la documentación oficial</a></li>
-  <li>Encargado de pista: <a href="https://docs.microsoft.com/en-us/dotnet/csharp/">Enlace a la documentación oficial</a></li>
-<li>Administrador: <a href="https://docs.microsoft.com/en-us/dotnet/csharp/">Enlace a la documentación oficial</a></li>
+<li>Propietario:</li>
+    - Rol que permite al usuario el acceso total a todos lo módulos del sistema y ejecutar todas las acciones de estas pantallas.
+<li>Encargado de pista:</li>
+    - Rol que permite al usuario el acceso a los módulos Pilotos, Vehículos, Cocheras y Pistas con ejecución de todas las acciones de los ABM’s de estas pantallas.
+<li>Administrador:</li>
+    - Solo permite el acceso a los módulos Pilotos y Vehículos pero no la creación o edición de los registros de estas pantallas (Usuario del tipo consulta)
 </ul>
 
    </details>
